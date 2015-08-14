@@ -1,0 +1,316 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+@font-face {
+	font-family: 'DroidSans';
+	src: url('../fonts/DroidSans-webfont.eot');
+	src: url('../fonts/DroidSans-webfont.eot?iefix') format('eot'),
+		url('../fonts/DroidSans-webfont.woff') format('woff'),
+		url('../fonts/DroidSans-webfont.ttf') format('truetype'),
+		url('../fonts/DroidSans-webfont.svg#webfont') format('svg');
+}
+/*
+html {
+	height: 100%;
+}
+*/
+body {
+	background: #588C8C;
+	color: #FFF;
+	height: 100vh !important;
+	margin: 0;
+	overflow: hidden;
+}
+
+.main {
+	text-align: center;
+	height: 100vh;
+}
+
+section {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding-top: 2%;
+}
+
+#screenshot-left {
+	margin: 3.5em 2.5em;
+	float: left;
+	width: 50%;
+/*	transform: perspective(1800px) rotateY(30deg);
+	-moz-transform: perspective(1800px) rotateY(30deg);
+	-webkit-transform: perspective(1800px) rotateY(30deg);
+	-o-transform: perspective(1800px) rotateY(30deg);*/
+}
+
+#screenshot-right {
+	margin: 3.5em 2.5em;
+	float: right;
+	width: 50%;
+/*	transform: perspective(1800px) rotateY(-30deg);
+	-moz-transform: perspective(1800px) rotateY(-30deg);
+	-webkit-transform: perspective(1800px) rotateY(-30deg);
+	-o-transform: perspective(1800px) rotateY(-30deg);*/
+}
+
+a {
+	text-decoration: none;
+	color: #FFF;
+}
+
+h1 {
+	clear: both;
+	position: relative;
+	z-index: 2;
+	font-size: 24pt;
+	margin-top: 7%;
+}
+
+h1, h2, h3 {
+	padding-top: 20px;
+}
+
+h1, h2, h3{
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 0.3em;
+}
+
+p, #hidden-nav a, .description, .features, #section-nav {
+	font-family: 'DroidSans', "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	letter-spacing: 0.1em;
+}
+
+p {
+	color: #181818;
+}
+
+#avatar {
+	position: relative;
+	width: 240px;
+	height: 240px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	background-color: #F4CB89;
+	z-index: 1;
+}
+
+#avatar:hover {
+	-webkit-animation: avatarGlow 0.4s 1 forwards;
+	-moz-animation: avatarGlow 0.4s 1 forwards;
+	animation: avatarGlow 0.4s 1 forwards;
+}
+
+@-webkit-keyframes avatarGlow {
+	100% { box-shadow: 5px 5px 10px #D9042B, -5px -5px 10px #D9042B, -5px 5px 10px #D9042B, 5px -5px 10px #D9042B;}
+}
+
+@-moz-keyframes avatarGlow {
+	100% { box-shadow: 5px 5px 10px #D9042B, -5px -5px 10px #D9042B, -5px 5px 10px #D9042B, 5px -5px 10px #D9042B;}
+}
+
+@keyframes avatarGlow {
+	100% { box-shadow: 5px 5px 10px #D9042B, -5px -5px 10px #D9042B, -5px 5px 10px #D9042B, 5px -5px 10px #D9042B;}
+}
+
+#avatar, #hidden-nav {
+	border: 2px solid #6B0C22;
+}
+
+#hidden-nav {
+	display: none;
+	position: relative;
+	width: 40%;
+	top: -80px;
+	background-color: #D9042B;
+	color: #D8D8D8;
+	border: 1px solid #6B0C22;
+	border-radius: 2px;
+	margin: 0 28.5%;
+	padding: 0 10px;
+	z-index: 3;
+	box-shadow: 10px 10px 15px rgba(25,25,25,0.5), -10px 10px 20px rgba(25,25,25,0.5);
+}
+
+#hidden-nav li {
+	list-style: none;
+	text-align: left;
+	padding: 10px 10px;
+}
+
+#hidden-nav a {
+	color: #FFF;
+}
+
+ul.icon-panel {
+	list-style: none;
+	padding: 0;
+}
+
+.icon-panel li {
+	display: inline-block;
+	margin: 0 0.5em;
+}
+
+#piece1, #piece3 {
+	background: #011C26;
+	color: #FFF;
+}
+
+#piece2, #piece4 {
+	background: #6B0C22;
+	color: #FFF;
+}
+
+#screenshot {
+	width: 50%;
+}
+
+.back-to-top {
+background: none;
+margin: 0;
+position: fixed;
+bottom: 0;
+right: 0;
+width: 60px;
+height: 60px;
+z-index: 100;
+display: none;
+text-decoration: none;
+color: rgba(255,255,255,0.6);
+background: transparent;
+}
+ 
+.back-to-top i {
+  font-size: 60px;
+}
+
+.description {
+	position: relative;
+	color: #FFF;
+	margin: 4.5em 2em;
+}
+
+.features li {
+	padding-left: 3em;
+	list-style: none;
+}
+
+.description, .features ul, .features li {
+	text-align: left;
+}
+
+#section-nav {
+	clear: both;
+	margin: 15px auto 0;
+	text-indent: 0;
+	font-size: 80%;
+	text-align: left;
+	list-style-type: none;
+	font-style: italic;
+}
+
+#section-nav li {
+	display: inline-block;
+	padding: 5px 20px 0 0;
+}
+/*** Smartphone width optimization - iPhone4 is 320px, LG Optimus is 384px ***/
+@media screen and (max-width: 385px) {
+	#avatar {
+		max-width: 150px !important;
+		max-height: 150px !important;
+	}
+
+	#hidden-nav {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	#hidden-nav ul {
+		padding: 0;
+	}
+
+	#hidden-nav li {
+		padding: 10px 0;
+		text-align: center;
+	}
+	#screenshot-right, #screenshot-left {
+		width: 80%;
+		margin: 0 auto;
+		float: none;
+	}
+	.description {
+		clear: both;
+		margin: 10px 10%;
+		font-size: 75%;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	#avatar {
+		max-width: 120px !important;
+		max-height: 120px !important;
+	}
+
+	#hidden-nav {
+		margin-bottom: -90px;
+	}
+
+	.features {
+		font-size: 70%;
+		text-align: center;
+	}
+
+	.features li {
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		overflow: hidden;
+	}
+	li.ror, li.html5-bs-sass, li.html5-zurb-sass, li.mysql, li.aws, li.psql, li.heroku, li.jqui {
+		padding: 0;
+		visibility: hidden;
+	}
+	li.html5-bs-sass, li.html5-zurb-sass {
+		width: 120px;
+	}
+	li.no-icon {
+		display: none;
+	}
+	.ror::before, .html5-bs-sass::before, .html5-zurb-sass::before, .mysql::before, .aws::before, .psql::before, .heroku::before, .jqui::before {
+		position: relative;
+		visibility: visible;
+	}
+	.ror::before {
+		content: url('../images/rails-icon.png');
+	}
+	.html5-bs-sass::before {
+		content: url('../images/html5-bs-sass-icon.png');
+	}
+	.html5-zurb-sass::before {
+		content: url('../images/html5-zurb-sass-icon.png');
+	}
+	.mysql::before {
+		content: url('../images/mysql-icon.png');
+	}
+	.aws::before {
+		content: url('../images/amazon-icon.png');
+	}
+	.psql::before {
+		content: url('../images/postgresql-icon.png');
+	}
+	.heroku::before {
+		content: url('../images/heroku-icon.png');
+	}
+	.jqui::before {
+		content: url('../images/jquery-ui-icon.png');
+	}
+}
+
+@media screen and (max-width: 780px) {
+	.features {
+		clear: both;
+	}
+}

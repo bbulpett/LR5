@@ -1,0 +1,110 @@
+<!doctype html>
+<head>
+	<title>Barnabas Bulpett</title>
+ 	<meta name="viewport" content="width=device-width,initial-scale=1">
+ 	<meta name="description" content="Portfolio for Barnabas Bulpett, Web Developer in Asheville, NC">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<link rel="stylesheet" href="stylesheets/portfolio.css" media="all" type="text/css">
+	<link rel="stylesheet" href="stylesheets/font-awesome.min.css">
+	<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="scripts/jquery.onepage-scroll.js"></script>
+	<script type="text/javascript" src="scripts/jquery.portfolio-transforms.js"></script>
+	<script type="text/javascript" src="scripts/jquery.portfolio-back-to-top.js"></script>
+	<script>
+		// Control behavior of page scrolling plugin
+		$(document).ready(function(){
+			$( ".main" ).onepage_scroll({
+				sectionContainer: "section",
+				easing: "ease",
+				responsiveFallback: false,
+				loop: true,
+				pagination: false
+			});
+		});
+	</script>
+
+</head>
+<body>
+<div class="main">
+	<section id="home">
+		<h1>Barnabas Bulpett</h1>
+		<img id="avatar" src="images/bbulpett-obama-poster.gif" alt="Avatar photo for Barnabas Bulpett">
+		<div id="hidden-nav">
+			<ul>
+				<li><a href="#piece1">Capstone Savings Bank</a></li>
+				<li><a href="#piece2">CarGawker</a></li>
+<!-- 
+				<li><a href="#piece3">Portfolio piece 3</a></li>
+				<li><a href="#piece4">Portfolio piece 4</a></li>
+				 -->
+			</ul>
+		</div>
+		<div id="address-block">
+			<h3>Web Developer</h3>
+			<p>Asheville, NC<br />
+			<a href="tel:8285056794" style="font-weight: 600; color: #03253D;">828.505.6794</a></p>
+			<ul class="icon-panel">
+				<li><a href="mailto:bbulpett@charter.net?Subject=Portfolio%20inquiry" target="_top"><i class="fa fa-envelope-o fa-2x"></i>&nbsp;</a></li>
+				<li><a href="https://github.com/bbulpett?tab=repositories" target="_blank"><i class="fa fa-github fa-2x"></i>&nbsp;</a></li>
+				<li><a href="https://www.linkedin.com/pub/barnabas-bulpett/b2/665/b22" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i>&nbsp;</a></li>
+			</ul>
+		</div>
+	</section>
+	<section id="piece1">
+		<a href="http://www.capstonesavings.com" target="_blank"><h2>Capstone Savings Bank</h2>
+		<img id="screenshot-left" src="images/capstone-screenshot.png" alt="Screen shot of Capstone Savings project"></a>
+		<div class="description">
+			<em>An online banking site with administration portal and registration wizard, seeded with default user and account data.</em>
+		</div>
+		<div class="features">
+			<ul><strong>Features</strong></ul>
+				<li class="ror">Ruby on Rails 4 backend</li>
+				<li class="html5-bs-sass">Responsive HTML5 frontend with Twitter Bootstrap and Sass</li>
+				<li class="no-icon">Devise-based authentication wizard</li>
+				<li class="mysql">MySQL database</li>
+				<li class="aws">Amazon Web Services (Elastic Beanstalk) cloud hosting</li>
+			</ul>
+		</div>
+		<ul id="section-nav">
+			<li><a href="http://www.capstonesavings.com" target="_blank"><i class="fa fa-external-link fa-lg"></i>&nbsp;Visit site</a></li>
+			<li><a href="https://github.com/bbulpett/capstone_project" target="_blank"><i class="fa fa-github fa-lg"></i>&nbsp;GitHub repository</a></li>
+		</ul>
+	</section>
+	<section id="piece2">
+		<a href="https://cargawker-rails.herokuapp.com/" target="_blank"><h2>CarGawker</h2>
+		<img id="screenshot-right" src="images/cargawker-screenshot.png" alt="Screen shot of CarGawker project"></a>
+		<div class="description">
+			<em>A curated image gallery of classic, rare and exotic automobiles. Inspired by the popular "Gawker" sites.</em>
+		</div>
+		<div class="features">
+			<ul><strong>Features</strong></ul>
+				<li class="ror">Ruby on Rails 4 backend</li>
+				<li class="html5-zurb-sass">Responsive HTML5 frontend with Zurb Foundation and Sass</li>
+				<li class="psql">PostgreSQL database</li>
+				<li class="heroku">Heroku cloud hosting with remote image storage</li>
+				<li class="jqui">jQuery-UI enhancements</li>
+			</ul>
+		</div>
+		<ul id="section-nav">
+			<li><a href="https://cargawker-rails.herokuapp.com/" target="_blank"><i class="fa fa-globe fa-lg"></i>&nbsp;Visit site</a></li>
+			<li><a href="https://github.com/bbulpett/cargawker" target="_blank"><i class="fa fa-github fa-lg"></i>&nbsp;GitHub repository</a></li>
+		</ul>
+	</section>
+<!-- 	
+	<section id="piece3">
+		<h2>Portfolio Piece 3</h2>
+	</section>
+	<section id="piece4">
+		<h2>Portfolio Piece 4</h2>
+	</section>
+ -->
+</div>
+<!-- "Sticky" button for back to top -->
+<a href="#" class="back-to-top">
+	<i class="fa fa-arrow-circle-up"></i>
+</a>
+
+</body>
