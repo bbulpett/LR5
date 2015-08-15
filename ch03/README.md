@@ -50,3 +50,27 @@ Now create a new html.erb file in the app/views/layouts folder called standardLa
 	<p>(using standard layout)</p>
 
 Save the new file and refresh the browser to see changes.
+
+#### "Sharing Template Data with the Layout (hello0)"
+(open app/views/hello/index.html.erb) Add the following HTML structure below the existing code:
+
+	<% content_for(:list) do %>
+		<ol>
+			<% for i in 1 ..@count %>
+			<li><%= @bonus %></li>
+			<% end %>
+		</ol>
+	<% end %>
+
+(open app/layouts/hello.html.erb) Add the statement `<%= yield :list %>` to the area just below the `<body>` tag so that the body contents read as follows:
+
+	<body>
+	<%= yield :list %>
+	<!-- layout will incorporate view -->
+	<%= yield %>
+	</body>
+
+Save the file and refresh the browser to see the ordered list of the bonus message at the top of the viewport.
+
+## IMPORTANT NOTE:
+"Setting a Default Page" has been intentionally omitted. The default page has already been set in Chapter 1 (hello01), where the line `root 'hello#index'` defined the default page (root) of the site. Rails 5 no longer uses the syntax _`root :to => "hello#index"`_.
