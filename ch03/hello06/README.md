@@ -1,24 +1,23 @@
-## README
+#LR5
+_The following steps were used to recreate the Learning Rails 3 files within Ruby on Rails version 5.0.0.alpha. Development environment Ruby 2.2.2 and Rails 5.0.0.alpha on Ubuntu Linux version 14.04._
+##Chapter 3:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+####"Choosing a Layout from a Controller (hello06)"
+(open app/controllers/hello_controller.rb) Add a layout call so the controller now reads as follows:
 
-Things you may want to cover:
+	class HelloController < ApplicationController
 
-* Ruby version
+		layout "standardLayout"
 
-* System dependencies
+		def index
+			@message="Hello!"
+			@count=3
+			@bonus="This message came from the controller."
+		end
+	end
 
-* Configuration
+Now create a new html.erb file in the app/views/layouts folder called standardLayout.html.erb. Paste the contents of the _hello.html.erb_ layout into the newly created file and change the contents of the paragraph tag to the following:
 
-* Database creation
+	<p>(using standard layout)</p>
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Save the new file and refresh the browser to see changes.
