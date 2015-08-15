@@ -18,7 +18,7 @@ _The following steps were used to recreate the Learning Rails 3 files within Rub
 		
 Save the updated stylesheet and refresh browser window.
 
-"Creating a Layout for a Controller (hello05)"
+#### "Creating a Layout for a Controller (hello05)"
 (Create a new file in the app/views/layouts folder called hello.html.erb) 
 Copy the contents of application.html.erb into the newly created hello.html.erb file.
 Remove the contents of the `<title>` tag and replace with the following variable reference:
@@ -31,7 +31,7 @@ Add the following line to the space between the `<body>` tag and the `<%= yield 
 
 Save changes to the file and refresh the browser.
 
-"Choosing a Layout from a Controller (hello06)"
+#### "Choosing a Layout from a Controller (hello06)"
 (open app/controllers/hello_controller.rb) Add a layout call so the controller now reads as follows:
 
 	class HelloController < ApplicationController
