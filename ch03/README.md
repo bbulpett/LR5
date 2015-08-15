@@ -51,7 +51,7 @@ Now create a new html.erb file in the app/views/layouts folder called standardLa
 
 Save the new file and refresh the browser to see changes.
 
-#### "Sharing Template Data with the Layout (hello0)"
+#### "Sharing Template Data with the Layout (hello07)"
 (open app/views/hello/index.html.erb) Add the following HTML structure below the existing code:
 
 	<% content_for(:list) do %>

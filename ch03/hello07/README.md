@@ -4,7 +4,7 @@ _The following steps were used to recreate the Learning Rails 3 files within Rub
 
 ##Chapter 3
 
-#### "Sharing Template Data with the Layout (hello0)"
+#### "Sharing Template Data with the Layout (hello07)"
 (open app/views/hello/index.html.erb) Add the following HTML structure below the existing code:
 
 	<% content_for(:list) do %>
