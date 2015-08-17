@@ -2,7 +2,7 @@
 
 _The following steps were used to recreate the Learning Rails 3 files within Ruby on Rails version 5.0.0.alpha. Development environment Ruby 2.2.2 and Rails 5.0.0.alpha on Ubuntu Linux version 14.04._
 
-##Chapter 3
+## Chapter 3
 
 #### "Sharing Template Data with the Layout (hello07)"
 (open app/views/hello/index.html.erb) Add the following HTML structure below the existing code:
