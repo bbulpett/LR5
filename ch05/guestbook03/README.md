@@ -1,24 +1,33 @@
-## README
+##LR5
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Chapter 5:
 
-Things you may want to cover:
+####"A First Look at Scaffolding"
 
-* Ruby version
+Run the following command at the terminal: `rails new guestbook03`
 
-* System dependencies
+Navigate to the new project directory: `cd guestbook03`
 
-* Configuration
+Run the following command to creat a model with supporting scaffolding:
 
-* Database creation
+	rails generate scaffold Person name:string
 
-* Database initialization
+Run `rake db:migrate` and start the server: `rails server`. This will show the generic Rails "welcome" page. Instead, we want the application to open at the index page for the _People_ model that was just created by the scaffold generator. Open guestbook03/config/routes.rb and look for the following line (around line 7):
 
-* How to run the test suite
+	# root 'welcome#index'
 
-* Services (job queues, cache servers, search engines, etc.)
+Remove the "#" sign from this line of code and change it to read like this:
 
-* Deployment instructions
+	root 'people#index'
 
-* ...
+Save the changes to the file and restart the server with `rails server`. Refreshing the browser will now show the index page for the _People_ model. Click the "New Person" link to reach the "New Person" page. Enter a name and click the "Create" button. 
+
+NOTE: The scaffolding has added a Person model represented by the _person.rb_ file. However, this model is empty. Older versions of Rails would have inserted a line reading `attr_accessible :name` to define what model attributes the application could access. Instead, this application has created *strong parameters* in *people_controller.rb*. A private method at the end of the controller reads as follows:
+
+	def person_params
+	    params.require(:person).permit(:name)
+	end	
+
+This method achieves the same as the one added to the *guestbook02* app in chapter 4. Scaffolding has created this for us automatically.
+
+
