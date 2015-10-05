@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= f.label :secret %><br>
-    <%= f.text_field :secret %>
+    <%= f.password_field :secret %>
   </div>
 
   <div class="field">
@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :cols => 30, :rows => 10 %>
   </div>
 
   <div class="field">
@@ -43,7 +43,7 @@
 
   <div class="field">
     <%= f.label :graduation_year %><br>
-    <%= f.number_field :graduation_year %>
+    <%= f.hidden_field :graduation_year %>
   </div>
 
   <div class="field">
