@@ -29,6 +29,8 @@ Change the code so that the "secret" attribute uses the *password_field* method:
 
 	<%= f.password_field :secret %>
 
+This will display asterisks (or dots, depending on browser defaults or any style modifications) when the user enters their "secret" criteria.
+
 To change the size of the description's *text_area*, change that line of code to look like this:
 
 	<%= f.text_area :description, :cols => 30, :rows => 10 %>
@@ -37,6 +39,7 @@ Demonstrating another option that Rails supports for text fields, locate the "gr
 
 	<%= f.hidden_field :graduation_year %>
 
-	*NOTE*: hidden fields are not particularly useful in forms that create new objects, but can come in useful elsewhere in your applications. Also note that the *label* for this field remains on the form. To completely hide the field in the view, simply delete the label on the hidden field.
-
-This will display asterisks (or dots, depending on browser defaults or any style modifications) when the user enters their "secret" criteria.
+	*NOTE*: hidden fields are not particularly useful in forms that create new objects,
+	 but can come in useful elsewhere in your applications. Also note that the *label* 
+	 for this field remains on the form. To completely hide the field in the view, 
+	 simply delete the label on the hidden field.
