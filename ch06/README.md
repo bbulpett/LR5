@@ -18,15 +18,25 @@ Open *localhost:3000/people* in the browser to start the new application. Click 
 
 #### "Creating Text Fields and Text Areas"
 
-In a text editor, open *app/views/people/_form.html.erb* and localte the following block of code:
+In a text editor, open *app/views/people/_form.html.erb* and locate the following block of code:
 
 	<div class="field">
     		<%= f.label :secret %><br>
     		<%= f.text_field :secret %>
 	</div>
 
-Change the code so that the line the "secret" attribute uses the *password_field* method:
+Change the code so that the "secret" attribute uses the *password_field* method:
 
 	<%= f.password_field :secret %>
+
+To change the size of the description's *text_area*, change that line of code to look like this:
+
+	<%= f.text_area :description, :cols => 30, :rows => 10 %>
+
+Demonstrating another option that Rails supports for text fields, locate the "graduation year" attribute and make it a *hidden* field:
+
+	<%= f.hidden_field :graduation_year %>
+
+	*NOTE*: hidden fields are not particularly useful in forms that create new objects, but can come in useful elsewhere in your applications. Also note that the *label* for this field remains on the form. To completely hide the field in the view, simply delete the label on the hidden field.
 
 This will display asterisks (or dots, depending on browser defaults or any style modifications) when the user enters their "secret" criteria.
