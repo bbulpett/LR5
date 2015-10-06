@@ -43,3 +43,13 @@ Demonstrating another option that Rails supports for text fields, locate the "gr
 	 but can come in useful elsewhere in your applications. Also note that the *label* 
 	 for this field remains on the form. To completely hide the field in the view, 
 	 simply delete the label on the hidden field.
+
+### "Labels"
+
+In the div that contains the "name" field, change the text that will display above the text field. Change the following line:
+
+	<%= f.label :name %><br />
+
+by adding a comma and then the string (in quotes) to be displayed:
+
+	<%= f.label :name, 'Your name' %>
