@@ -21,10 +21,22 @@
     <%= f.password_field :secret %>
   </div>
 
-  <div class="field">
-    <%= f.label :country %><br>
-    <%= f.text_field :country %>
-  </div>
+<!--   <fieldset>
+  <legend>Country</legend>
+    <%= f.radio_button :country, 'USA' %> <%= f.label "person_country_usa", "USA" %><br> 
+    <%= f.radio_button :country, 'Canada' %> <%= f.label "person_country_canada", "Canada" %><br> 
+    <%= f.radio_button :country, 'Mexico' %> <%= f.label "person_country_mexico", "Mexico" %><br>
+  </fieldset> -->
+
+  <% nations = { 'United States of America' => 'USA', 'Canada' => 'Canada', 'Mexico' => 'Mexico', 'United Kingdom' => 'UK' }%>
+
+  <fieldset>
+    <legend>Country</legend>  
+    <% list = nations.sort 
+    list.each {|x| %>
+      <%= f.radio_button :country, x[1] %> <label for="<%= ("person_country_" + x[1].downcase) %>"><%= x[0] %></label><br /> 
+    <% } %>
+  </fieldset>
 
   <div class="field">
     <%= f.label :email %><br>
