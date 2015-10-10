@@ -44,7 +44,7 @@ Demonstrating another option that Rails supports for text fields, locate the "gr
 	 for this field remains on the form. To completely hide the field in the view, 
 	 simply delete the label on the hidden field.
 
-### "Labels"
+#### "Labels"
 
 In the div that contains the "name" field, change the text that will display above the text field. Change the following line:
 
@@ -54,11 +54,11 @@ by adding a comma and then the string (in quotes) to be displayed:
 
 	<%= f.label :name, 'Your name' %>
 
-### "Creating Checkboxes"
+#### "Creating Checkboxes"
 
 Scaffolding has generated all of our app's checkbox functionality. Refer to the text for explanation of options for **check_box** method.
 
-### "Creating Radio Buttons"
+#### "Creating Radio Buttons"
 
 Open *app/views/people/_form.html.erb* in the text editor and locate the input field for the *country* attribute (starting around line 24). Delete this block of code (or surround it with HTML comment tags <!-- -->). In its place, enter the following code block to create a specific list of linked radio buttons:
 
@@ -69,24 +69,30 @@ Open *app/views/people/_form.html.erb* in the text editor and locate the input f
 	<%= f.radio_button :country, 'Mexico' %> <%= f.label "person_country_mexico", "Mexico" %><br>
 	</fieldset>
 
-Refresh the "New Person" form in the browser to view the set of radio buttons Rails has created. Next, endeavoring to keep the code DRY, create some whitespace just above the <fieldset> tag you just created and enter the following **hash**:
+Refresh the "New Person" form in the browser to view the set of radio buttons Rails has created. Next, endeavoring to keep the code DRY, create some whitespace just above the `<fieldset>` tag you just created and enter the following **hash**:
 
 	<% nations = { 'United States of America' => 'USA', 'Canada' => 'Canada', Mexico' => 'Mexico', 'United Kingdom' => 'UK' }%>
 
 This also allows us to use more descriptive naming for the button descriptions in the view while saving the chosen entry as an abbreviation for efficiency.
 **NOTE:** A hash of values like this would normally be created in the controller and referenced here in the view.
 
-To use the hash we just created, we must now modify the contents of the <fieldset>. Delete (or comment) the <fieldset> code block and replace it with the following:
+To use the hash we just created, we must now modify the contents of the `<fieldset>`. Delete (or comment) the <fieldset> code block and replace it with the following:
 
 	<fieldset>
 	    <legend>Country</legend>
 	    <% list = nations.sort 
 	    list.each {|x| %>
-	      <%= f.radio_button :country, x[1] %> <label for="<%= ("person_country_" + x[1].downcase) %>"><%= x[0] %></label><br /> 
+	      <%= f.radio_button :country, x[1] %>
+	 	<label for="<%= ("person_country_" + x[1].downcase) %>"><%= x[0] %>
+		</label><br> 
 	    <% } %>
   	</fieldset>
 
 Save the file and refresh the browser to see the new form in action.
+
+#### "Dates and Times"
+
+Scaffolding has generated all of our app's date and time selection. Refer to the text for explanation of time selector methods, helper methods, and options.
 
 	
 
