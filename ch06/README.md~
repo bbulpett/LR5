@@ -44,7 +44,7 @@ Demonstrating another option that Rails supports for text fields, locate the "gr
 	 for this field remains on the form. To completely hide the field in the view, 
 	 simply delete the label on the hidden field.
 
-### "Labels"
+#### "Labels"
 
 In the div that contains the "name" field, change the text that will display above the text field. Change the following line:
 
@@ -54,11 +54,11 @@ by adding a comma and then the string (in quotes) to be displayed:
 
 	<%= f.label :name, 'Your name' %>
 
-### "Creating Checkboxes"
+#### "Creating Checkboxes"
 
 Scaffolding has generated all of our app's checkbox functionality. Refer to the text for explanation of options for **check_box** method.
 
-### "Creating Radio Buttons"
+#### "Creating Radio Buttons"
 
 Open *app/views/people/_form.html.erb* in the text editor and locate the input field for the *country* attribute (starting around line 24). Delete this block of code (or surround it with HTML comment tags <!-- -->). In its place, enter the following code block to create a specific list of linked radio buttons:
 
@@ -89,6 +89,10 @@ To use the hash we just created, we must now modify the contents of the `<fields
   	</fieldset>
 
 Save the file and refresh the browser to see the new form in action.
+
+#### "Dates and Times"
+
+Scaffolding has generated all of our app's date and time selection. Refer to the text for explanation of time selector methods, helper methods, and options.
 
 	
 
