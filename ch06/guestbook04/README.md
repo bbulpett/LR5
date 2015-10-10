@@ -96,6 +96,54 @@ Scaffolding has generated all of our app's date and time selection. Refer to the
 
 #### "Creating Helper Methods"
 
+Open *app/helpers/people_helper.rb* in the text editor. The **buttons** method will help to simplify the radio button code in the form view. Create the method by defining it in the "PeopleHelper" module, like this:
+
+	module PeopleHelper
+		def buttons(model_name, target_property, button_source)
+			html=''
+			list = button_source.sort
+			html << '<fieldset><legend>Country</legend>'
+			list.each {|x|
+				html << radio_button(model_name, target_property, x[1])
+				html << (x[0])
+				html << '<br>'
+			}
+			html << '</fieldset>'
+			return html.html_safe
+		end
+	end
+
+Returning to the *_form.html.erb* file, comment (or delete) the entire `<fieldset>` code block, including the `<fieldset>` tags themselves. Don't remove the "nations" hash, it is still needed. In place of this block, insert the following line of code:
+
+	<%= buttons(:person, :country, nations) %>
+
+This basically passes values from the *nations* hash to the *person* model's *country* property, using the new *buttons* method. It uses the exact order of arguments that were defined in the above method. The method uses an `each` loop to list all the values from the "nations" hash.
+
+**Optionally**, a helper method could be created to conditionally represent the hash values as a list instead of radio buttons. This might be useful if there were too many buttons, cluttering the view. This method would look like this:
+
+	
+	def button_select(model_name, target_property, button_source)
+		html=''
+		list = button_source.sort
+
+		if list.length < 4
+			html << '<fieldset><legend>Country</legend>'
+			list.each {|x|
+				html << radio_button(model_name, target_property, x[1])
+				html << (x[0])
+				html << '<br>'
+			}
+			html << '</fieldset>'
+		else
+			html << ' <label for="person_country">Country</label><br>'
+			html << select(model_name, target_property, list)
+		end
+		return html.html_safe
+	end
+
+Note that in the view, the helper method call (`<%= buttons(...) %>`) would need to be changed to `<%= button_select(...) %>` to use this method.
+
+
 	
 
 
