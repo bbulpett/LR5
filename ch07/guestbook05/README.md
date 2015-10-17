@@ -1,24 +1,10 @@
-## README
+#LR5
+##Chapter 7
+###"Strengthening Models with Validation"
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Validation is a way to ensure that only appropriate data is stored in the application's database. Although _client-side_ validations can easily be done with HTML5 or javascript, this approach is less secure than the _server-side_ validations that we will now add to our Rails models.
 
-Things you may want to cover:
+To begin, open last app from Chapter 6 (guestbook04) in the text editor. >Alternatively, a new app can be created (i.e. "guestbook05") that is identical to ch06/guestbook04.
 
-* Ruby version
+####"The Power of Declarative Validation (guestbook05)"
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
