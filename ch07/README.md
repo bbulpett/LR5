@@ -7,6 +7,29 @@ Validation is a way to ensure that only appropriate data is stored in the applic
 To begin, open last app from Chapter 6 (guestbook04) in the text editor.
 
 <sub>Alternatively, a new app can be created (i.e. "guestbook05") that is identical to _ch06/guestbook04_.</sub>
+####"The Original Model"
 
+As we first discussed in chapter 4 (_ch04/guestbook02_), the attributes for models we create are defined (as "required" or "permitted") in the associated controller. Therefore, in **app/models/person.rb** we find an empty model declaration that looks like this:
+
+		class Person < ActiveRecord::Base
+		end
+
+However, in **app/controllers/people_controller.rb**, we find the following method appended to the end of the file:
+
+		# Never trust parameters from the scary internet, only allow the white list through.
+	    	def person_params
+	      		params.require(:person).permit
+			(:name, :secret, :country, :email, :description, :can_send_email, :graduation_year, :body_temperature, :price, :birthday, :favorite_time)
+	    	end
+
+Having these attributes abstracted to the controller enhances the security of our data and provides a clean slate to work with the model itself.
+	
 ####"The Power of Declarative Validation (guestbook05)"
+
+
+
+
+
+
+
 
