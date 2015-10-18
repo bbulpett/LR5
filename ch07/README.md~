@@ -26,7 +26,11 @@ Having these attributes abstracted to the controller enhances the security of ou
 	
 ####"The Power of Declarative Validation (guestbook05)"
 
+In the text editor, open _app/models/person.rb_. Create a little whitespace between the `class Person...` line and the `end` statement. Add the following line of code to mandate the inclusion of the "name" attribute when creating a new **Person** model:
 
+		validates_presence_of :name
+
+Save the file 
 
 
 

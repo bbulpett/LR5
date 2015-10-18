@@ -26,8 +26,11 @@ Having these attributes abstracted to the controller enhances the security of ou
 	
 ####"The Power of Declarative Validation (guestbook05)"
 
+In the text editor, open _app/models/person.rb_. Create a little whitespace between the `class Person...` line and the `end` statement. Add the following line of code to mandate the inclusion of the "name" attribute when creating a new **Person** model:
 
+		validates_presence_of :name
 
+Save the file, then navigate to _localhost:3000/people_ in the browser. Click the "New Person" link to bring up the form. Fill out the form, but **leave the "name" field blank**. When the _Create Person_ button is clicked, the transaction begins, but is unsuccessful. Rails immediately "rolls back" the transaction and issues an error, "Name can't be blank", which comes from `<div id="error_explanation">` in the _app/views/people/\_form_ partial. 
 
 
 
