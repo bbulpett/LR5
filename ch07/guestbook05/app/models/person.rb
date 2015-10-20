@@ -36,4 +36,32 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false,
   	:scope => [:name, :secret],
     :message => "has already been entered, you can't sign in twice"
+
+  # graduation year must be numeric, and within sensible bounds. however,
+  # the person may not have graduated, so we allow a nil value too. finally
+  # it must be a whole number (integer)
+  validates_numericality_of :graduation_year, :allow_nil => true,
+    :greater_than => 1920, :less_than_or_equal_to => Time.now.year,
+    :only_integer => true
+
+  # body temperature doesn't have to be a whole number, but we ought to
+  # constrain possible values. we assume our users aren't in cryostasis
+  validates_numericality_of :body_temperature, :allow_nil => true,
+    :greater_than_or_equal_to => 60,
+    :less_than_or_equal_to => 130, :only_integer => false
+  
+  validates_numericality_of :price, :allow_nil => true,
+    :only_integer => false
+
+  # restrict birthday to reasonable values, ie. not in the future and not
+  # before 1900
+  validates_inclusion_of :birthday,
+    :in => Date.civil(1900, 1, 1) .. Date.today,
+    :message => "must be between January 1st, 1900 and today"
+
+  # finally, we just say that favorite time is mandatory. while the view
+  # only allows you to post valid times, remember that models can be created
+  # in other ways, such as from code or web service calls. so it's not safe
+  # to make assumptions based on the form
+  validates_presence_of :favorite_time
 end

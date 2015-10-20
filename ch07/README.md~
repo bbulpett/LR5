@@ -92,14 +92,35 @@ This checks **:email** against the "email" database column. To check **:email** 
 			:scope => [:name, :secret],
 			:message => "has already been entered, you can't sign in twice"
 
+#####"Numbers Only"
 
+The Rails *validates_numericality_of* method, as its name implies, checks if the input is a number. A wide variety of parameters may be included to test for specific numeric values. Add the following line to _app/models/person.rb_ to test the "graduation_year" value:
 
+		validates_numericality_of :graduation_year, :allow_nil => true,
+			:greater_than => 1920,
+			:less_than_or_equal_to => Time.now.year,
+			:only_integer => true
 
+To further exemplify Rails numeric validations, add the following lines of code to validate "body_temperature" and "price":
 
+		validates_numericality_of :body_temperature, :allow_nil => true,
+			:greater_than_or_equal_to => 60,
+			:less_than_or_equal_to => 130, :only_integer => false
 
+		validates_numericality_of :price, :allow_nil => true,
+			:only_integer => false
 
+#####"A Place on the Calendar"
 
+Using validations to test whether a date falls within a specific range is similar to checking a value in an array ("Limiting Choices"). Again, we use the *validates_inclusion_of* method, but this time referencing methods of Ruby's *Date* class:
+		
+		validates_inclusion_of :birthday,
+			:in => Date.civil(1900, 1, 1) .. Date.today,
+			:message => "must be between January 1st, 1900 and today"
 
+#####"Testing for Presence"
 
+Just like the **:name** field above, we add the following line to ensure that the **:favorite_time** field contains an entry:
 
+		validates_presence_of :favorite_time
 
