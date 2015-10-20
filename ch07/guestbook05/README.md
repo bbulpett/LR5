@@ -63,4 +63,31 @@ Add the following validations to test the actual _content_ of the **:secret** en
 
 Save the changes to _person.rb_ and restart the Rails server. As before, navigate to the "New Person" form in the browser and fill in the form. Test the above validations in the "secret" field. Notice that leaving the field empty will trigger _all_ of the validation messages upon submitting the form.
 
+#####"Limiting Choices"
 
+Returning to _app/models/person.rb_, we can add the following validation to ensure that the value is one of the choices in an array:
+
+		validates_inclusion_of :country,
+			:in => ['Canada', 'Mexico', 'UK', 'USA'],
+			:message => "must be one of Canada, Mexico, UK, or USA"
+
+#####"Testing Format with Regular Expressions"
+
+Regular expressions can be used in validations to ensure that the input matches a specific format.
+
+		validates_format_of :email, 
+			:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+			:message => "doesn't look like a proper email address"
+
+#####"Seen It All Before"
+
+Validating whether a value matches a record already in the database can be useful when dealing with usernames, user emails, and other criteria. 
+
+		validates_uniqueness_of :email, :case_sensitive => false,
+			:message => "has already been entered, you can't sign in twice"
+
+This checks **:email** against the "email" database column. To check **:email** against additional columns (as well as the "email" column), we use the **:scope** property. For example, the following validation also checks if the entry exists in the **:name** or **:secret** columns:
+
+		validates_uniqueness_of :email, :case_sensitive => false,
+			:scope => [:name, :secret],
+			:message => "has already been entered, you can't sign in twice"
