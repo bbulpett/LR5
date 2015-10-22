@@ -131,7 +131,7 @@ Open the guestbook application in the text editor.
 
 #####"Test It Only If"
 
-In app/models/person.rb, create a new line after the last validation and add the following validation:
+In *app/models/person.rb*, create a new line after the last validation and add the following validation:
 
 		validates_presence_of :description, :if => :require_description_presence?
 
@@ -141,5 +141,14 @@ In app/models/person.rb, create a new line after the last validation and add the
 
 The above validation will be conducted only **if** the boolean *"can_send_email"* field is TRUE. If it is, then the _description_ field will be required.
 
+#####"Do It Yourself"
+
+Adding a custom validation requires creating a method for the validation logic and then calling that method using **validate**. In addition, we tell rails what error message to display with the **self.errors.add** method.
+
+Add the following validation to *app/models/person.rb*:
+
+		validate :description_length_words
+
+Before this validation will work, however, the method must be defined. Add the following code to create a method that validates the length (in words) of the description field:
 
 

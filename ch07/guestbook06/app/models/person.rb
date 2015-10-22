@@ -75,4 +75,23 @@ class Person < ActiveRecord::Base
   def require_description_presence?
     self.can_send_email
   end
+
+  # we would also like to do some validation that Rails can't do easily.
+  # if the description is present, we'd like it to be at least 5 words long,
+  # and at most 50 words long
+  
+	validate :description_length_words
+	  
+  def description_length_words
+    # only do this validation if description is provided
+    unless self.description.blank? then
+      # simple way of calculating words: split the text on whitespace
+      num_words = self.description.split.length
+      if num_words < 5 then
+        self.errors.add(:description, "must be at least 5 words long")
+      elsif num_words > 50 then
+        self.errors.add(:description, "must be at most 50 words long")
+      end
+    end
+  end
 end
