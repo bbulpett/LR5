@@ -64,4 +64,15 @@ class Person < ActiveRecord::Base
   # in other ways, such as from code or web service calls. so it's not safe
   # to make assumptions based on the form
   validates_presence_of :favorite_time
+
+  # NEW IN THIS EXAMPLE
+  
+  # if person says 'can send email', then we'd like them to fill their
+  # description in, so we understand who it is we're sending mail to
+  validates_presence_of :description, :if => :require_description_presence?
+  
+  # we define the supporting condition here
+  def require_description_presence?
+    self.can_send_email
+  end
 end

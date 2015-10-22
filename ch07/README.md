@@ -124,3 +124,22 @@ Just like the **:name** field above, we add the following line to ensure that th
 
 		validates_presence_of :favorite_time
 
+###"Beyond Simple Declarations"
+
+Open the guestbook application in the text editor.
+<sub>Alternatively, a new app can be created (i.e. "guestbook05") that is identical to _ch06/guestbook04_.</sub>
+
+#####"Test It Only If"
+
+In app/models/person.rb, create a new line after the last validation and add the following validation:
+
+		validates_presence_of :description, :if => :require_description_presence?
+
+		def require_description_presence?
+			self.can_send_email
+		end
+
+The above validation will be conducted only **if** the boolean *"can_send_email"* field is TRUE. If it is, then the _description_ field will be required.
+
+
+
