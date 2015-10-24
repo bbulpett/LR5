@@ -1,0 +1,72 @@
+<%= form_for(person) do |f| %>
+  <% if person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :secret %><br>
+    <%= f.text_field :secret %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country %><br>
+    <%= f.text_field :country %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :can_send_email %><br>
+    <%= f.check_box :can_send_email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :graduation_year %><br>
+    <%= f.number_field :graduation_year %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body_temperature %><br>
+    <%= f.text_field :body_temperature %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birthday %><br>
+    <%= f.date_select :birthday %>
+  </div>
+
+  <div class="field">
+    <%= f.label :favorite_time %><br>
+    <%= f.time_select :favorite_time %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
