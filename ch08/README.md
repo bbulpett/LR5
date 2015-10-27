@@ -25,7 +25,34 @@ Since the form is now a "multipart" form, accepting attachment files along with 
 Remember to save the updated form before proceeding.
 
 #####"Model and Migration Changes"
+**A migration for an extension**
 
-	
+In the terminal, ensure that the prompt is at the current app (i.e. "guestbook") directory and run the following command:
+
+		rails generate migration add_photo_extension_to_person
+
+Locate the migration that was just created in the _db/migrate_ directory. Add the following line of code to the _change_ method:
+
+		def change
+			add_column :people, :extension, :string
+		end
+
+Run `rake db:migrate` to add the new column to the **:people** table.
+
+**Strong parameters, again**
+
+The migration has added the extension as a column in the database, however the information is still coming to the application as **:photo**. This means that **:photo** needs to be "whitelisted" in the private **person_params** method (at the end of *app/controllers/people_controller.rb*. The updated **person_params** method should look like this:
+
+		# Never trust parameters from the scary internet, only allow the white list through.
+		def person_params
+			params.require(:person).permit(:name, :secret, :country,
+				:email, :description, :can_send_email, 
+				:graduation_year, :body_temperature, :price,
+				:birthday, :favorite_time, :photo)
+		end
+
+**Extending a model beyond the database**
+
+
 
 
