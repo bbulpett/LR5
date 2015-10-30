@@ -91,4 +91,28 @@ Add the following method just after the **:store_photo** callback method above, 
 			end
 		end
 
+After the **photo=** assignment method, define a path for the image files to be stored. Add the following line:
+
+		PHOTO_STORE = File.join Rails.root, 'public', 'photo_store'
+
+NOTE: File.join is a cross-platform way of joining directories. Alternatively, we could have written "#{Rails.root}/public/photo_store".
+
+The following method uses this new path and generates a filename based on the **Person** id associated with the photo, concatenated with the file extension:
+
+		def photo_filename
+			File.join PHOTO_STORE, "#{id}.#{extension}"
+		end
+
+The next method creates a reference to the path of the photo which may be used as a URL in the view.
+
+		def photo_path
+			"/photo_store/*{id}.#{extension}"
+		end
+
+Finally, a method to verify that a photo actually exists. This will eliminate "broken" image links in the view.
+
+		def has_photo?
+			File.exists? photo_filename
+		end
+
 
