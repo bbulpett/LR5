@@ -108,6 +108,21 @@ class Person < ActiveRecord::Base
     end
   end
   
+  # return a path we can use in HTML for the image
+  def photo_path
+    "/photo_store/#{id}.#{extension}"
+  end
+  
+  # where to write the image file to
+  def photo_filename
+    File.join PHOTO_STORE, "#{id}.#{extension}"
+  end
+
+  # if a photo file exists, then we have a photo
+  def has_photo?
+    File.exists? photo_filename
+  end
+  
   private
   
   # called after saving, to write the uploaded image to the filesystem
