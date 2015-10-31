@@ -128,4 +128,36 @@ In the text editor, open *app/views/people/show.html.erb* and add the following 
 				<% end %>
 		</p>
 
+#####"Results"
+
+Start the rails server (`rails s`) and navigate in the browser to _localhost:3000/people_. Use the form to create a new **Person** model with a photo attached. Once created, the model will be available on the index page. Select the **Show** link to view the updated **Person** display, as created in the previous section ("Showing It Off").
+
+###"Standardizing Your Look with Form Builders"
+####"Supporting Your Own Field Types"
+
+Endeavoring to keep the application's forms closely associated with its models, create a form helper that accepts more specific types of data. The application uses the *button_select* helper method created in Chapter 6. Create a new file in *app/helpers* called `tidy_form_builder.rb`, which will contain the following code:
+
+		class TidyFormBuilder < ActionView::Helpers::FormBuilder
+			def country_select(method, options={}, html_options={})
+				select(method, [['Canada', 'Canada'],
+				['Mexico', 'Mexico'],
+				['United Kingdom', 'UK'],
+				['United States of America', 'USA']],
+				options, html_options)
+			end
+		end
+
+Whereas helper classes are available to the app's views by name, *builders* need to be called **explicitly**. To call *TidyFormBuilder* in the Person form, add it as the **:builder** parameter in the *form_for* method (app/views/people/_form.html.erb):
+
+		<%= form_for(@person, :html => { :multipart => true }, :builder => TidyFormBuilder) do |f| %>
+
+Now, replace the _entire_ `<div>` in the form that pertains to the **:country** field, with the following "tidier" block that uses the **country_select** method as defined in the TidyFormBuilder:
+
+		<div class="field">
+			<%= f.label :country %><br>
+			<%= f.country_select :country %>
+		</div>
+		 
+Opening the form in the browser shows that the dropdown menu for the **:country** field works the same as it did before. However, the code is now much more efficient and specific.
+
 
