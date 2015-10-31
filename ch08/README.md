@@ -115,4 +115,21 @@ Finally, a method to verify that a photo actually exists. This will eliminate "b
 			File.exists? photo_filename
 		end
 
+**Showing It Off**
+
+In the text editor, open *app/views/people/show.html.erb* and add the following code just before the `<%= link_to %>` statements at the end:
+
+		<p>
+			<strong>Photo:</strong>
+				<% if @person.has_photo? %>
+					<%= image_tag @person.photo_path %>
+				<% else %>
+					No photo.
+				<% end %>
+		</p>
+
+#####"Results"
+
+Start the rails server (`rails s`) and navigate in the browser to _localhost:3000/people_. Use the form to create a new **Person** model with a photo attached. Once created, the model will be available on the index page. Select the **Show** link to view the updated **Person** display, as created in the previous section ("Showing It Off").
+
 

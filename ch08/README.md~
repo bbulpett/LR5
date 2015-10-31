@@ -95,6 +95,8 @@ After the **photo=** assignment method, define a path for the image files to be 
 
 		PHOTO_STORE = File.join Rails.root, 'public', 'photo_store'
 
+NOTE: File.join is a cross-platform way of joining directories. Alternatively, we could have written "#{Rails.root}/public/photo_store".
+
 The following method uses this new path and generates a filename based on the **Person** id associated with the photo, concatenated with the file extension:
 
 		def photo_filename
@@ -112,5 +114,18 @@ Finally, a method to verify that a photo actually exists. This will eliminate "b
 		def has_photo?
 			File.exists? photo_filename
 		end
+
+**Showing It Off**
+
+In the text editor, open *app/views/people/show.html.erb* and add the following code just before the `<%= link_to %>` statements at the end:
+
+		<p>
+			<strong>Photo:</strong>
+				<% if @person.has_photo? %>
+					<%= image_tag @person.photo_path %>
+				<% else %>
+					No photo.
+				<% end %>
+		</p>
 
 
