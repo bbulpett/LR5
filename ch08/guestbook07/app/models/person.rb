@@ -108,6 +108,9 @@ class Person < ActiveRecord::Base
     end
   end
   
+  # because it will contain static files, create the PHOTO_STORE directory in the "public" folder.
+  PHOTO_STORE = File.join Rails.root, 'public', 'photo_store'
+
   # return a path we can use in HTML for the image
   def photo_path
     "/photo_store/#{id}.#{extension}"
@@ -122,7 +125,7 @@ class Person < ActiveRecord::Base
   def has_photo?
     File.exists? photo_filename
   end
-  
+
   private
   
   # called after saving, to write the uploaded image to the filesystem

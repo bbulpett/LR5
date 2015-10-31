@@ -55,5 +55,14 @@
   <%= @person.favorite_time %>
 </p>
 
+<p>
+  <strong>Photo:</strong>
+    <% if @person.has_photo? %>
+      <%= image_tag @person.photo_path %>
+    <% else %>
+      No photo.
+    <% end %>
+</p>
+
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>
