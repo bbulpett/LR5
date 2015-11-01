@@ -1,4 +1,4 @@
-<%= form_for(@person, :html => { :multipart => true }, :builder => TidyFormBuilder) do |f| %>
+<%= form_for(@person, html: { multipart: :true }, builder: TidyFormBuilder) do |f| %>
   <% if person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -12,62 +12,50 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, 'Your name' %><br>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :secret %><br>
     <%= f.password_field :secret %>
   </div>
 
   <div class="field">
-    <%= f.label :country %><br>
     <%= f.country_select :country %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
 
   <div class="field">
-    <%= f.label :description %><br>
     <%= f.text_area :description, :cols => 30, :rows => 10 %>
   </div>
 
   <div class="field">
-    <%= f.label :can_send_email %><br>
     <%= f.check_box :can_send_email %>
   </div>
 
   <div class="field">
-    <%= f.label :graduation_year %><br>
     <%= f.hidden_field :graduation_year %>
   </div>
 
   <div class="field">
-    <%= f.label :body_temperature %><br>
     <%= f.text_field :body_temperature %>
   </div>
 
   <div class="field">
-    <%= f.label :price %><br>
     <%= f.text_field :price %>
   </div>
 
   <div class="field">
-    <%= f.label :birthday %><br>
     <%= f.date_select :birthday %>
   </div>
 
   <div class="field">
-    <%= f.label :favorite_time %><br>
     <%= f.time_select :favorite_time %>
   </div>
 
   <div class="field">
-      <%= f.label :photo %><br>
       <%= f.file_field :photo %>
   </div>
   
