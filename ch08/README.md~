@@ -165,5 +165,10 @@ Now, replace the _entire_ `<div>` in the form that pertains to the **:country** 
 		 
 Opening the form in the browser shows that the dropdown menu for the **:country** field works the same as it did before. However, the code is now much more efficient and specific.
 
+####"Adding Automation"
+
+To begin open last exercise, "Standardizing Your Look with Form Builders" (guestbook08), in the text editor.
+
+<sub>Alternatively, a new app can be created (i.e. "guestbook09") that is identical to _ch08/guestbook08_.</sub>
 
 
