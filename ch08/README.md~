@@ -171,4 +171,84 @@ To begin open last exercise, "Standardizing Your Look with Form Builders" (guest
 
 <sub>Alternatively, a new app can be created (i.e. "guestbook09") that is identical to _ch08/guestbook08_.</sub>
 
+Returning to the text editor, open *app/helpers/tidy_form_builder.rb*. After the `country_select` method, add the following method. It will eliminate the need for `f.label` for text fields in the form view:
+
+		def text_field(method, options={})
+			label_for(method, options) + super(method, options)
+		end
+
+The **method** and **options={}** parameters are straight out of the Rails API documentation. These parameters will vary for other field types.
+For this to work, we must also add the **label_for** method at the end of the _TidyFormBuilder_ class. It is a "private" method, meaning it may only be used within the model class.
+
+		private
+
+		def label_for(method, optoins={})
+			label(options.delete(:label) || method).safe_concat("<br />")
+		end
+
+Now, back in *app/views/people/_form.html.erb*, we can eliminate the `f.label` code from all of the text fields. They will simply be..
+
+		<div class="field">
+			<%= f.text_field :name %>
+		</div>
+		
+		...
+
+		<div class="field">
+			<%= f.text_field :email %>
+		</div>
+		
+		...
+
+		<div class="field">
+			<%= f.text_field :body_temperature %>
+		</div>
+
+		...
+
+		<div class="field">
+			<%= f.text_field :price %>
+		</div>
+
+Similarly, we must now add methods for the other field types. Again, the parameters are derived from the Rails API documentation. These are not "private" methods and should be entered just after the `text_field` definition.
+
+		def text_area(method, options={})
+			label_for(method, options) + super(method, options)
+		end
+ 
+		def password_field(method, options={})
+			label_for(method, options) + super(method, options)
+		end
+   
+		def file_field(method, options={})
+			label_for(method, options) + super(method, options)
+		end
+
+Other helpers are slightly more complex..
+
+		def date_select(method, options = {}, html_options = {})
+			label_for(method, options) + super(method, options, html_options)
+		end
+
+		def select(method, choices, options = {}, html_options = {})
+			label_for(method, options) + super(method, choices, options, html_options)
+		end
+
+		def time_select(method, options = {}, html_options = {})
+			label_for(method, options) + super(method, options, html_options)
+		end
+
+		def check_box(method, options = {}, checked_value = "1", unchecked_value = "0")
+			label_for(method, options) + super(method, options, checked_value, unchecked_value)
+		end
+
+		
+
+		
+
+
+
+		
+
+		
 
