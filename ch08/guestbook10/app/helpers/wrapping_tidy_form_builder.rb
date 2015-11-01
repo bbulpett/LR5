@@ -1,6 +1,6 @@
-class TidyFormBuilder < ActionView::Helpers::FormBuilder
+class WrappingTidyFormBuilder < ActionView::Helpers::FormBuilder
   # To save repeating ourselves in many contexts, we can create
-  # our own helper for picking countries.
+  # our own helper for picking countries.
 
   # We might want to write:
   # <div class="field">
@@ -24,49 +24,58 @@ class TidyFormBuilder < ActionView::Helpers::FormBuilder
    # little knowledge about how the form helpers are usually called.
    # We can get this from the Rails API documentation.
    
-   # Most of the helpers have a similar signature
+   # Most of the helpers have a similar signature
    
   def text_field(method, options={})
     # Helpers just return text to be included in the output
     # Here we create our label, and add it onto the front
     # of the superclass (ie. the default helper) output
-    label = label_for(method, options) + super(method, options)
+    wrap_field(label = label_for(method, options) + super(method, options), options)
   end
 
   def text_area(method, options={})
-     label_for(method, options) + super(method, options)
+     wrap_field(label_for(method, options) + super(method, options), options)
   end
  
   def password_field(method, options={})
-    label_for(method, options) + super(method, options)
+    wrap_field(label_for(method, options) + super(method, options), options)
   end
    
   def file_field(method, options={})
-    label_for(method, options) + super(method, options)
+    wrap_field(label_for(method, options) + super(method, options), options)
   end
 
-  # Other helpers are slightly more complex
-
   def date_select(method, options = {}, html_options = {})
-    label_for(method, options) + super(method, options, html_options)
+    wrap_field(label_for(method, options) + super(method, options, html_options), options)
   end
 
   def select(method, choices, options = {}, html_options = {})
-     label_for(method, options) + super(method, choices, options, html_options)
+     wrap_field(label_for(method, options) + super(method, choices, options, html_options), options)
   end
 
   def time_select(method, options = {}, html_options = {})
-    label_for(method, options) + super(method, options, html_options)
+    wrap_field(label_for(method, options) + super(method, options, html_options), options)
   end
 
   def check_box(method, options = {}, checked_value = "1", unchecked_value = "0")
-    label_for(method, options) + super(method, options, checked_value, unchecked_value)
+    wrap_field(label_for(method, options) + super(method, options, checked_value, unchecked_value), options)
   end
 
   private
 
   def label_for(method, options={})
-    (label( options.delete(:label)|| method).safe_concat("<br />"))
+    label = label(options.delete(:label) || method)
+    if options[:required]
+      label.safe_concat(" <span class='required_mark'>*</span>")
+    end
+    label.safe_concat("<br />")
   end
 
+  def wrap_field(text, options={})
+    field_class = "field"
+    if options[:required]
+      field_class = "field required"
+    end
+    "<div class='#{field_class}'>".html_safe.safe_concat(text).safe_concat("</div>")
+  end
 end

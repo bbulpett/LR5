@@ -242,4 +242,108 @@ Other helpers are slightly more complex..
 			label_for(method, options) + super(method, options, checked_value, unchecked_value)
 		end
 
-Once these helper methods have been added to the _TidyFormBuilder_, it is possible to remove the respective `f.label` code from the "people" form partial.	The form code is now much more efficient, legible, and flexible.	
+Once these helper methods have been added to the _TidyFormBuilder_, it is possible to remove the respective `f.label` code from the "people" form partial.	The form code is now much more efficient, legible, and flexible.
+
+####"Integrating Form Builders and Styles"
+
+To begin open last exercise, "Adding Automation" (guestbook09), in the text editor.
+
+<sub>Alternatively, a new app can be created (i.e. "guestbook10") that is identical to _ch08/guestbook09_.</sub>
+
+The form can be more user-friendly, by citing which fields are _required_. In the text editor, create a new file - *app/helpers/wrapping_tidy_form_builder.rb*. This file will be very similar to the *tidy_form_builder* helper created in the last exercise.
+
+To present the "required" fields in a more user-friendly fashion, add the parameter **required: :true** to the following fields in *app/views/people/_form.html.erb*:
+
+		<%= f.text_field :name, required: true %>
+
+		<%= f.password_field :secret, required: true %>
+
+		<%= f.country_select :country, required: true %>
+		
+Copy and paste the contents of *app/helpers/tidy_form_builder.rb* into the new *wrapping_tidy_form_builder.rb* file. Change the class name (first line) from *TidyFormBuilder* to *WrappingTidyFormBuilder*.
+
+Add another **private** method just after the `label_for` method:
+
+		def wrap_field(text, options={})
+			field_class = "field"
+			if options[:required]
+				field_class = "field required"
+			end
+			"<div class='#{field_class}'>".html_safe.safe_concat(text).safe_concat("</div>")
+		end
+
+All of the methods that defined fields in the last exercise ("Adding Automation") need to call **wrap_field**. The new methods will contain the `wrap_field` method and its two parameters: the complete label_for method (with all of *its* parameters) and options. They will look like this:
+
+		def text_field(method, options={})
+			wrap_field(label = label_for(method, options) + super(method, options), options)
+		end
+
+		def text_area(method, options={})
+			wrap_field(label_for(method, options) + super(method, options), options)
+		end
+
+		def password_field(method, options={})
+			wrap_field(label_for(method, options) + super(method, options), options)
+		end
+
+		def file_field(method, options={})
+			wrap_field(label_for(method, options) + super(method, options), options)
+		end
+
+		def date_select(method, options = {}, html_options = {})
+			wrap_field(label_for(method, options) + super(method, options, html_options), options)
+		end
+
+		def select(method, choices, options = {}, html_options = {})
+			wrap_field(label_for(method, options) + super(method, choices, options, html_options), options)
+		end
+
+		def time_select(method, options = {}, html_options = {})
+			wrap_field(label_for(method, options) + super(method, options, html_options), options)
+		end
+
+		def check_box(method, options = {}, checked_value = "1", unchecked_value = "0")
+			wrap_field(label_for(method, options) + super(method, options, checked_value, unchecked_value), options)
+		end
+
+**IMPORTANT NOTE**: Notice that `country_select` does not use the `wrap_field` method. That is because it calls **select** which has already called `wrap_field` itself.
+
+Also important is to ensure that the forms are accessible for browsers not using CSS. This requires modifying the **label_for** method to apply an *asterisk* character as follows..
+
+		def label_for(method, options={})
+			label = label(options.delete(:label) || method)
+			if options[:required]
+				label.safe_concat(" <span class='required_mark'>*</span>")
+			end
+			label.safe_concat("<br />")
+		end
+
+For the form to use the new helper, it must be specified as the **:builder** in *app/views/people/_form.html.erb*:
+
+		
+		<%= form_for(@person, html: { multipart: :true }, builder: WrappingTidyFormBuilder) do |f| %>
+
+Lastly, add the following styles to *app/assets/stylesheets/people.scss*:
+
+			div.field {
+				margin-top: 0.5em;
+				margin-bottom: 0.5em;
+				padding-left: 10px;
+			}
+
+			div.field label {
+				font-weight: bold;
+			}
+
+			div.field span.required_mark {
+				font-weight: bold;
+				color: red;
+			}
+
+			/* draw attention to required fields */
+			div.required {
+				padding-left: 6px;
+				border-left: 4px solid #DD0;
+			}
+
+Restart the rails server and navigate to `localhost:3000/people`. Click the "New Person" link to see the changes to the form.
