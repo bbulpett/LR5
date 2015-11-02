@@ -21,4 +21,18 @@ Now create an additional model with scaffolding..
 
 Notice that we've given the **award** model a "student_id" attribute. This will be used as a foreign key to connect to the **student** model.
 
+####"Establishing the Relationship"
+
+Next, the relationships must be defined in the application's models. In the text editor, open *app/models/student.rb* and insert the following declaration between the `class` and `end` lines:
+
+		has_many :awards
+
+Similarly, the following line must be added to *app/models/award.rb*:
+
+		belongs_to :student
+
+At the terminal, run `rake db:migrate`. The two models are now connected in a very basic *one-to-many* relationship. Starting the Rails server (`rails s`) and navigating to *localhost:3000/students/new*, create a new **student** record.
+
+####"Supporting the Relationship"
+
 
