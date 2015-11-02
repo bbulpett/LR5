@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Awards</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+      <th>Student</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @awards.each do |award| %>
+      <tr>
+        <td><%= award.name %></td>
+        <td><%= award.year %></td>
+        <td><%= award.student_id %></td>
+        <td><%= link_to 'Show', award %></td>
+        <td><%= link_to 'Edit', edit_award_path(award) %></td>
+        <td><%= link_to 'Destroy', award, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Award', new_award_path %>
