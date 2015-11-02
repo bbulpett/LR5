@@ -30,5 +30,21 @@
   <%= @student.start_date %>
 </p>
 
+<h3>Awards</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Year</th>
+    <th>Student</th>
+  </tr>
+<% for award in @student.awards %>
+  <tr>
+    <td><%= award.name %></td>
+    <td><%= award.year %></td>
+    <td><%= award.student.name %></td>
+  </tr>
+<% end %>
+</table>
+    
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>
