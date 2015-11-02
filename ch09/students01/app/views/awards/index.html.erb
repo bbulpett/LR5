@@ -17,7 +17,7 @@
       <tr>
         <td><%= award.name %></td>
         <td><%= award.year %></td>
-        <td><%= award.student_id %></td>
+        <td><%= award.student.name %></td>
         <td><%= link_to 'Show', award %></td>
         <td><%= link_to 'Edit', edit_award_path(award) %></td>
         <td><%= link_to 'Destroy', award, method: :delete, data: { confirm: 'Are you sure?' } %></td>

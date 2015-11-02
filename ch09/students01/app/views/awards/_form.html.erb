@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :student_id %><br>
-    <%= f.number_field :student_id %>
+    <%= f.select :student_id, Student.all.collect {|s| [s.name, s.id]} %>
   </div>
 
   <div class="actions">
