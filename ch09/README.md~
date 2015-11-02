@@ -78,5 +78,19 @@ Quickly test this by running rake db:migrate in the terminal and opening the Rai
 
 		a=Award.new(name: "Best Attitude", year: "2015", student_id: 999).save
 
-Assuming the database contains fewer than 999 users, the console will return **false** and roll back the "save" transaction.
+Assuming the database contains fewer than 999 students, the console will return **false** and roll back the "save" transaction.
+
 **NOTE:** It is important to note that, although **validates_associated** may be used on either side of the association, *it MUST NOT be used on both sides simultaneously*. This would create a "circular dependency" and an infinie recursion, causing the application to freeze or crash.
+
+###"Connecting Students to Awards"
+####"Removing Awards When Students Disappear"
+
+As the students-awards association currently stands, the removal of a student would create an *orphaned record* in the Awards table. Adding the following option to the Student model's **has_many** declaration solves this problem:
+
+		has_many :awards, :dependent => destroy
+
+The destruction of a **student** record will now cascade, destroying all of the student's awards along with it.
+
+
+
+
