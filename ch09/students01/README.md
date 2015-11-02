@@ -67,3 +67,16 @@ Furthermore, the above line we created in *app/views/awards/_form.html.erb* can 
 		<%= f.select :student_id, Student.all.collect {|s| [s.name, s.id]} %>
 
 Refreshing the view in the browser now shows the *name* of the student the award "belongs to", which is more readable for humans.
+
+####"Guaranteeing a Relationship"
+
+When assigning an award to a student it is important, of course, that that student actually exists in the database. Returning to *app/models/award.rb*, we can easily ensure that the student association exists by adding the following validation just after the `belongs_to :student' line:
+
+		validates_associated :student
+
+Quickly test this by running rake db:migrate in the terminal and opening the Rails console (`rails c`). At the prompt, try to create a new award with an *invalid* **:student_id** attribute. Something like this..
+
+		a=Award.new(name: "Best Attitude", year: "2015", student_id: 999).save
+
+Assuming the database contains fewer than 999 users, the console will return **false** and roll back the "save" transaction.
+**NOTE:** It is important to note that, although **validates_associated** may be used on either side of the association, *it MUST NOT be used on both sides simultaneously*. This would create a "circular dependency" and an infinie recursion, causing the application to freeze or crash.
