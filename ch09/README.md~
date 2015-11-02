@@ -66,4 +66,5 @@ Furthermore, the above line we created in *app/views/awards/_form.html.erb* can 
 
 		<%= f.select :student_id, Student.all.collect {|s| [s.name, s.id]} %>
 
+Refreshing the view in the browser now shows the *name* of the student the award "belongs to", which is more readable for humans.
 
