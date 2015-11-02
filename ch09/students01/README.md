@@ -87,9 +87,36 @@ Assuming the database contains fewer than 999 students, the console will return 
 
 As the students-awards association currently stands, the removal of a student would create an *orphaned record* in the Awards table. Adding the following option to the Student model's **has_many** declaration solves this problem:
 
-		has_many :awards, :dependent => destroy
+		has_many :awards, dependent: :destroy
 
 The destruction of a **student** record will now cascade, destroying all of the student's awards along with it.
 
+####"Counting Awards for Students"
 
+In order to display the amount of awards have been awarded to each student, open *app/views/students/index.html.erb* add a new column to the table. Add a table heading after the `<th>Start date</th>` line:
 
+		<th>Awards</th>
+
+Just after the `<td><%= student.start_date %></td>' line, add the following table cell:
+
+		<td><%= student.awards.count %></td>
+
+The student's awards are accessible to the student model due to the *has_many* relationship. Adding the following table to *app/views/students/show.html.erb*, just before the ending `<%= link_to ... %>` code, to handsomely display the student's awards...
+
+		<h3>Awards</h3>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Year</th>
+				<th>Student</th>
+			</tr>
+		<% for award in @student.awards %>
+			<tr>
+				<td><%= award.name %></td>
+				<td><%= award.year %></td>
+				<td><%= award.student.name %></td>
+			</tr>
+		<% end %>
+		</table>
+
+Visiting *localhost:3000/students* and navigating to a student's "show" page will render a table of their awards along with the model attributes.
