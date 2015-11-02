@@ -120,4 +120,3 @@ The student's awards are accessible to the student model due to the *has_many* r
 		</table>
 
 Visiting *localhost:3000/students* and navigating to a student's "show" page will render a table of their awards along with the model attributes.
-
