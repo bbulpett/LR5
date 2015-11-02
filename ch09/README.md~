@@ -35,4 +35,35 @@ At the terminal, run `rake db:migrate`. The two models are now connected in a ve
 
 ####"Supporting the Relationship"
 
+The form for generating a new award (*localhost:3000/awards/new*) has a text field for the student associated with the award. One way to ensure that only "existing" students will be entered is to use a **select** (drop-down) list. In *app/views/awards/_form.html.erb*, replace the line `<%= f.number_field :student_id %>` with the following piece of code, which generates a collection of students and organizes them by name:
+
+		<%= f.select :student_id, Student.all.order(:family_name,:given_name).collect {|s| [(s.given_name + " " + s.family_name), s.id]} %>
+
+The above code uses the `all` method of the ActiveRecord query interface to retrieve all student records, sorts them (the `order` method) by last and first name
+, and stores them in a collection which is used by the **select** method. Now when creating a new award at *localhost:3000/awards/new*, we can assign it to a particular student. However, when doing so, *app/views/awards/show* displays the integer value of the **:student_id**. This is easily fixed by replacing the `<%= @award.student_id %>` line in the *show* view with the following code:
+
+		<%= @award.student.given_name %> <%= @award.student.family_name %>
+
+And in the *index* view (since it comes from the counter variable of the **each** loop, the **award** has local scope)..
+	
+		<%= award.student.given_name %> <%= award.student.family_name %>
+
+To further simplify the display of the student's name, add the following method to the *app/models/student.rb*:
+
+		def name
+			given_name + " " + family_name
+		end
+
+Now we can change the above line in the *show* view to simply read as follows:
+
+		<%= @award.student.name %>
+
+And in the *index* view (again, the **award** variable has local scope)..
+
+		<%= award.student.name %>
+
+Furthermore, the above line we created in *app/views/awards/_form.html.erb* can be simplified:
+
+		<%= f.select :student_id, Student.all.collect {|s| [s.name, s.id]} %>
+
 
