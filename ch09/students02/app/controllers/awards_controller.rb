@@ -67,7 +67,7 @@ class AwardsController < ApplicationController
     @award = @student.awards.find(params[:id])
     @award.destroy
     respond_to do |format|
-      format.html { student_awards_path(@student), notice: 'Award was successfully destroyed.' }
+      format.html { redirect_to (student_awards_path(@student)), notice: 'Award was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
