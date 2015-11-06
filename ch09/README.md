@@ -201,6 +201,62 @@ Save the file. However, an attempt to navigate to the awards pages as before wil
 
 ####"Changing the Award Views"
 
+Open *app/views/awards/index.html.erb* in the text editor and change the heading to reflect the student whose awards are being shown..
+
+		<h1>Awards for <%= @student.name %></h1>
+
+Next, the awards table must be wrapped in a conditional block. Start by adding the following **if** statement just before the `<table>` tag:
+
+		<% if !@student.awards.empty? %>
+
+After the closing `</table>` tag, finish the conditional statement with the following code:
+
+		<% else %>
+			<p><%= @student.given_name %> hasn't won any awards yet.</p>
+		<% end %>
+
+The `link_to` statements also need to specify the student model:
+
+		`<td><%= link_to 'Show', [ @student, award ] %></td>`
+          	`<td><%= link_to 'Edit', edit_student_award_path( @student, award ) %></td>`
+          	`td><%= link_to 'Destroy', [ @student, award ], method: :delete, data: { confirm: 'Are you sure?' } %></td>`
+		
+		<%= link_to 'New Award', new_student_award_path(@student) %>
+
+Also, add a link to help users navigate "back"..
+
+		<%= link_to 'Back', @student %>
+
+In *app/views/awards/show.html.erb*, change the `link_to` statements in similar fashion:
+
+		<%= link_to 'Edit', edit_student_award_path(@student, @award) %>
+		<%= link_to 'Back', student_awards_path(@student) %>
+
+Both *app/views/awards/new.html.erb* and *app/views/awards/edit.html.erb* need their headings changed as follows, respectively..
+
+		<h1>New Award for <%= @student.name%></h1>
+
+and
+
+		<h1>Editing Award for <%= @student.name %></h1>
+
+Similar to the other views, the `link_to` statements at the bottom of the **new** and **edit** views need to change.
+
+Perhaps most importantly, *app/views/_form.html.erb* needs to reference the **student** model as well. Change the `form_for` call at the first line to read as follows:
+
+		<%= form_for([ @student, award ]) do |f| %>
+
+####"Connecting the Student Views"
+
+To make it more convenient to access the student's award views, add a link to *app/views/students/show.html.erb*, just between the **Edit** and **Back** links (at the bottom of the file):
+
+		<%= link_to 'Awards', student_awards_path(@student) %>
+
+Also, a link should be added to *app/views/students/index.html.erb*, as a table cell - between the links to the **Edit** and **Destroy**...
+
+		<td><%= link_to 'Awards', student_awards_path(@student) %></td>
+
+Lastly, when adding a table cell in this manner, the `colspan` attribute of the final `<th` tag (inside the `<thead></thead>` markup block) needs to be changed from "3" to "4".
 
 
 
