@@ -12,7 +12,7 @@
       <th>Grade point average</th>
       <th>Start date</th>
       <th>Awards</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -28,6 +28,7 @@
         <td><%= student.awards.count %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
+        <td><%= link_to 'Awards', student_awards_path(@student) %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
