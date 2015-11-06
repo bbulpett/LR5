@@ -254,9 +254,9 @@ To make it more convenient to access the student's award views, add a link to *a
 
 Also, a link should be added to *app/views/students/index.html.erb*, as a table cell - between the links to the **Edit** and **Destroy**...
 
-		<td><%= link_to 'Awards', student_awards_path(@student) %></td>
+		<td><%= link_to 'Awards', student_awards_path(student) %></td>
 
-
+Lastly, when adding a table cell in this manner, the `colspan` attribute of the final `<th` tag (inside the `<thead></thead>` markup block) needs to be changed from "3" to "4".
 
 
 
