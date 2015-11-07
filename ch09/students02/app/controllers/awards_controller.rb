@@ -12,7 +12,6 @@ class AwardsController < ApplicationController
   # GET /awards/1
   # GET /awards/1.json
   def show
-    @award = @student.awards.find(params[:id])
   end
 
   # GET /awards/new
@@ -23,7 +22,6 @@ class AwardsController < ApplicationController
 
   # GET /awards/1/edit
   def edit
-    @award = @student.awards.find(params[:id])
   end
 
   # POST /awards
@@ -47,7 +45,6 @@ class AwardsController < ApplicationController
   # PATCH/PUT /awards/1
   # PATCH/PUT /awards/1.json
   def update
-    @award = @student.awards.find(params[:id])
 
     respond_to do |format|
       if @award.update(award_params)
@@ -64,7 +61,6 @@ class AwardsController < ApplicationController
   # DELETE /awards/1
   # DELETE /awards/1.json
   def destroy
-    @award = @student.awards.find(params[:id])
     @award.destroy
     respond_to do |format|
       format.html { redirect_to (student_awards_path(@student)), notice: 'Award was successfully destroyed.' }
@@ -81,7 +77,7 @@ class AwardsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_award
-      @award = Award.find(params[:id])
+      @award = @student.awards.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

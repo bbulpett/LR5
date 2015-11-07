@@ -126,6 +126,19 @@ Perhaps most importantly, *app/views/_form.html.erb* needs to reference the **st
 
 		<%= form_for([ @student, award ]) do |f| %>
 
+Also, the field `<div` for the **student_id** attribute must also be removed. The award will only pertain to the current **student**. Remove the following block of code:
+
+		<div class="field">
+			<%= f.label :student_id %><br>
+			<%= f.select :student_id, Student.all.collect {|s| [s.name, s.id]} %>
+		</div>
+
+Finally, in *app/controllers/awards_controller*, the `@award = @student.awards.find(params[:id])` lines are no longer needed in the **show**, **edit**, **update** and **destroy** methods. Delete the lines from those methods. Then scroll down to the "private" section and change the **set_award** method to specify that awards will pertain to the current **student** model...
+
+		def set_award
+			@award = @student.awards.find(params[:id])
+		end
+
 ####"Connecting the Student Views"
 
 To make it more convenient to access the student's award views, add a link to *app/views/students/show.html.erb*, just between the **Edit** and **Back** links (at the bottom of the file):
@@ -137,3 +150,4 @@ Also, a link should be added to *app/views/students/index.html.erb*, as a table 
 		<td><%= link_to 'Awards', student_awards_path(student) %></td>
 
 Lastly, when adding a table cell in this manner, the `colspan` attribute of the final `<th` tag (inside the `<thead></thead>` markup block) needs to be changed from "3" to "4".
+
