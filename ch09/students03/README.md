@@ -33,4 +33,25 @@ Note that the **change** method in a migration creates a table and indexes. Thes
 
 ####"Connecting the Models"
 
+To declare this many-to-many relationship in the models, open *app/models/student.rb* in the text editor and add the following to the **Student** model definition:
 
+		has_and_belongs_to_many :courses
+
+Likewise, in *app/models/course.rb*...
+
+		has_and_belongs_to_many :students
+
+Now that the models are connected, add some convenience methods to the **Students** model. First, add a method that checks whether a student is enrolled in a particular course:
+
+		def enrolled_in?(course)
+			self.courses.include?(course)
+		end
+
+This will return `true` if a given course is in the student's course list. Next, create a similar method that shows which courses a student is *not* enrolled in:
+
+		def unenrolled_courses
+			Course.find(:all) - self.courses
+		end
+
+This method returns the list of courses that remains after *subtracting* those which already belong to a student.
+		
