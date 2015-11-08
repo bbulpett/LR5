@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rack/rack.git
-  revision: 35599cfc2751e0ee611c0ff799924b8e7fe0c0b4
+  revision: c393176b0edf3e5d06cabbb6eb9d9c7a07b2afa7
   specs:
     rack (2.0.0.alpha)
       json
@@ -88,7 +88,7 @@ PATH
       activesupport (= 5.0.0.alpha)
       arel (= 7.0.0.alpha)
     activesupport (5.0.0.alpha)
-      concurrent-ruby (~> 1.0.0.pre3, < 2.0.0)
+      concurrent-ruby (~> 1.0.0.pre5, < 2.0.0)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       method_source
@@ -116,12 +116,12 @@ GEM
   remote: https://rubygems.org/
   specs:
     builder (3.2.2)
-    byebug (6.0.2)
+    byebug (8.0.1)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
-    concurrent-ruby (1.0.0.pre4)
+    concurrent-ruby (1.0.0.pre5)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
