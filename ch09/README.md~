@@ -365,3 +365,29 @@ Next, the `course_remove` method will be used to "unenroll" a student from a cou
 			redirect_to :action => :courses, :id => @student
 		end
 
+####"Adding Routing"
+
+
+
+####"Supporting the Relationship Through Views"
+#####"Establishing navigation"
+
+To allow users to easily navigate between course and student views, create a navigation *partial* to be used across those different views. Within *app/views*, create a new subdirectory called *application*, which will contain a file called *_navigation.html.erb*. A simple partial with navigation links, *app/views/application/_navigation.html.erb* should look like this:
+
+		<p>
+			<%= link_to "Students", students_url %> |
+			<%= link_to "Courses", courses_url %>
+		</p>
+	
+		<hr />
+
+To render the partial across all views, add the following statement to *app/views/layouts/application.html.erb*:
+
+		<body>
+	
+		<%= render 'navigation' %>
+
+		<%= yield %>
+
+
+		
