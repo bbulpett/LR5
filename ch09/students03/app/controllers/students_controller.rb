@@ -61,10 +61,47 @@ class StudentsController < ApplicationController
     end
   end
 
+  # POST /students/1/course_add?course_id=2
+  # (note no real query string, just
+  # convenient notation for parameters)
+  def course_add
+    #Convert course id from routing to objects
+    @course = Course.find(params[:course])
+    unless @student.enrolled_in?(@course)
+      #add course to list using << operator
+      @student.courses << @course
+      flash[:notice] = 'Student was successfully enrolled'
+    else
+      flash[:error] = 'Student was already enrolled'
+    end
+    redirect_to :action => :courses, id => @student
+  end
+
+  # POST /students/1/course_remove?courses[]=
+  def course_remove
+    #get list of courses to remove from query string
+    @course_ids = params[:courses]
+    unless course_ids.blank?
+      course_ids.each do |course_id|
+        course = Course.find(course_id)
+        if @student.enrolled_in?(course)
+          logger.info "Removeing student from course #{course.id}"
+          @student.courses.delete(course)
+          flash[:notice] = 'Course was successfully deleted'
+        end
+      end
+    end
+    redirect_to :action => :courses, :id => @student
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
+    end
+
+    def courses
+      @courses = @student.courses
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
