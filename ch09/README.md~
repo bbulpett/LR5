@@ -311,7 +311,7 @@ Likewise, in *app/models/course.rb*...
 
 		has_and_belongs_to_many :students
 
-Now that the models are connected, add some convenience methods to the **Students** model. First, add a method that checks whether a student is enrolled in a particular course:
+Now that the models are connected, add some convenience methods to the **Students** model. First, add a method (after the **name** method) that checks whether a student is enrolled in a particular course:
 
 		def enrolled_in?(course)
 			self.courses.include?(course)
@@ -323,6 +323,45 @@ This will return `true` if a given course is in the student's course list. Next,
 			Course.find(:all) - self.courses
 		end
 
-This method returns the list of courses that remains after *subtracting* those which already belong to a student.
+This method returns the list of courses that remains after *subtracting* those which already belong to a student. 
 		
+####"Adding to the Controllers"
+
+The next step is to supplement the existing RESTful interfaces in the controllers by adding methods that will add to their functionality. In *app/controllers/students_controller.rb*, add a method to determine which courses belong to the current student. The **@student** instance variable has already been defined in the private `set_student` method. Just after this method, add the following code:
+
+		def courses
+			@courses = @student.courses
+		end
+
+The `course_add` method, as its name describes, will add a course for the student. Add it just after the `destroy` method...
+
+		def course_add
+			@course = Course.find(params[:course])
+
+			unless @student.enrolled_in?(@course)
+				@student.courses << @course
+				flash[:notice] = 'Student was successfully enrolled'
+			else
+				flash[:error] = 'Student was already enrolled'
+			end
+			redirect_to :action => :courses, id => @student
+		end
+
+Next, the `course_remove` method will be used to "unenroll" a student from a course:
+
+		def course_remove
+			@course_ids = params[:courses]
+			
+			unless course_ids.blank?
+				course_ids.each do |course_id|
+					course = Course.find(course_id)
+					if @student.enrolled_in?(course)
+						logger.info "Removeing student from course #{course.id}"
+						@student.courses.delete(course)
+						flash[:notice] = 'Course was successfully deleted'
+					end
+				end
+			end
+			redirect_to :action => :courses, :id => @student
+		end
 
