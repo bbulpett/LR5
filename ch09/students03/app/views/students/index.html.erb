@@ -11,6 +11,7 @@
       <th>Date of birth</th>
       <th>Grade point average</th>
       <th>Start date</th>
+      <th>Courses</th>
       <th>Awards</th>
       <th colspan="4"></th>
     </tr>
@@ -25,6 +26,7 @@
         <td><%= student.date_of_birth %></td>
         <td><%= student.grade_point_average %></td>
         <td><%= student.start_date %></td>
+        <td><%= student.courses.count %></td>
         <td><%= student.awards.count %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>

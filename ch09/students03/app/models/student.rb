@@ -1,6 +1,7 @@
 class Student < ActiveRecord::Base
 	# A student may have many awards
 	has_many :awards, dependent: :destroy
+	has_and_belongs_to_many :courses
 
 	# a student can be on many courses, a course can have many students
 	has_and_belongs_to_many :courses
@@ -16,7 +17,7 @@ class Student < ActiveRecord::Base
 
 	# list the courses that student is NOT enrolled in
 	def unenrolled_courses
-		Course.find(:all) - self.courses
+		Course.all - self.courses
 	end
 
 end

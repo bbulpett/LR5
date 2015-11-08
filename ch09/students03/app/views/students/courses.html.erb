@@ -1,0 +1,39 @@
+<h1><%= @student.name %>'s courses</h1>
+
+<% if @courses.length > 0 %>
+  <%= form_tag(course_remove_student_path(@student)) do %>
+<table>
+  <thead>
+    <tr>
+    <th>Course</th>
+    <th>Remove?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for course in @courses do %>
+    <tr>
+    <td><%= course.name %></td>
+    <td><%= check_box_tag "courses[]", course.id %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+  <%= submit_tag 'Remove checked courses' %>
+<% end %>
+<% else %>
+  <p>Not enrolled in any courses yet.</p>
+<% end %>
+
+<h2>Enroll in new course</h2>
+<% if @student.courses.count < Course.count then %>
+  <%= form_tag(course_add_student_path(@student)) do %>
+    <%= select_tag(:course, options_from_collection_for_select(@student.unenrolled_courses, :id, :name)) %>
+    <%= submit_tag 'Enroll' %>
+  <% end %>
+<% else %>
+  <p><%= @student.name %> is enrolled in every course.</p>
+<% end %>
+<p><%=link_to "Back", @student %></p>

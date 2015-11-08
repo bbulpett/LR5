@@ -30,6 +30,15 @@
   <%= @student.start_date %>
 </p>
 
+<p>
+  <strong>Courses:</strong>
+  <% if !@student.courses.empty? %>
+    <%= @student.courses.collect {|c| link_to(c.name, c)}.join(", ").html_safe %>
+  <% else %>
+    Not enrolled in any courses yet.
+  <% end %>
+</p>
+
 <h3>Awards</h3>
 <table>
   <tr>
@@ -47,5 +56,6 @@
 </table>
     
 <%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Courses', courses_student_path(@student) %> |
 <%= link_to 'Awards', student_awards_path(@student) %> |
 <%= link_to 'Back', students_path %>
