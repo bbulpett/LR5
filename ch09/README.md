@@ -275,6 +275,12 @@ Lastly, when adding a table cell in this manner, the `colspan` attribute of the 
 
 *Many-to-many*, like *one-to-many* is a common database relationship. In this section, the **Course** model will be created. It will not be "nested" within Students, as it is essentially at an equal level from a data modeling perspective.
 
+This section builds on the "student02" application by altering routing and controller logic to create nested resources and further define the actual roles of the app's models.
+
+To begin, open the app from the previous section (student02) in the text editor.
+
+<sub>Alternatively, a new app can be created (i.e. "student03") that is identical to _ch09/student02_.</sub>
+
 ####"Creating Tables"
 
 Create two new tables. The first, **Courses** will contain the actual course list and thereby need full scaffolding. In the terminal, enter:
@@ -327,15 +333,17 @@ This method returns the list of courses that remains after *subtracting* those w
 		
 ####"Adding to the Controllers"
 
-The next step is to supplement the existing RESTful interfaces in the controllers by adding methods that will add to their functionality. In *app/controllers/students_controller.rb*, add a method to determine which courses belong to the current student. The **@student** instance variable has already been defined in the private `set_student` method. Just after the `destroy` method, add the following code:
+The next step is to supplement the existing RESTful interfaces in the controllers by adding methods that will add to their functionality. In *app/controllers/students_controller.rb*, add a method to determine which courses belong to the current student. Just after the `destroy` method, add the following code:
 
 		def courses
+			@student = Student.find(params[:id])
 			@courses = @student.courses
 		end
 
-The `course_add` method, as its name describes, will add a course for the student. Add it just after the `destroy` method...
+The `course_add` method, as its name describes, will add a course for the student. Add it just after the `courses` method...
 
 		def course_add
+			@student = Student.find(params[:id])
 			@course = Course.find(params[:course])
 
 			unless @student.enrolled_in?(@course)
@@ -344,13 +352,14 @@ The `course_add` method, as its name describes, will add a course for the studen
 			else
 				flash[:error] = 'Student was already enrolled'
 			end
-			redirect_to :action => :courses, id => @student
+			redirect_to action: "courses", id: @student
 		end
 
 Next, the `course_remove` method will be used to "unenroll" a student from a course:
 
 		def course_remove
-			@course_ids = params[:courses]
+			@student = Student.find(params[:id])
+			course_ids = params[:courses]
 			
 			unless course_ids.blank?
 				course_ids.each do |course_id|
@@ -362,7 +371,7 @@ Next, the `course_remove` method will be used to "unenroll" a student from a cou
 					end
 				end
 			end
-			redirect_to :action => :courses, :id => @student
+			redirect_to action: "courses", id: @student
 		end
 
 ####"Adding Routing"
