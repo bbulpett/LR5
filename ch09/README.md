@@ -501,4 +501,36 @@ Before the above "Courses" link can be used, the view must be created. Create th
 		<% end %>
 		<p><%=link_to "Back", @student %></p>
 
-	
+In the "show" view for **courses**, *app/views/courses/show.html.erb*, place an additional `link_to` statement between the "Edit" and "Back" links:
+
+		<%= link_to 'Roll', roll_course_path(@course) %>
+
+This uses a route which was created in the above section, "Adding Routing", that corresponds with the **roll** method added to *courses_controller.rb*. Add a new file called *app/views/courses/roll.html.erb* that contains the following code:
+
+		<h1>Roll for <%= @course.name %></h1>
+
+		<% if @course.students.count > 0 %>
+			<table>
+				<thead>
+					<tr>
+						<th>Student</th>
+						<th>GPA</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for student in @course.students do %>
+					<tr>
+						<td><%= link_to student.name, student %></td>
+						<td><%= student.grade_point_average %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% else %>
+			<p>No students are enrolled.</p>
+		<% end %>
+
+		<p><%= link_to "Back", @course %></p>
+
+Save the file and navigate to *localhost:3000/courses* in the browser. Create a new course, add some students, and visit the "roll" page to view the results.
+
