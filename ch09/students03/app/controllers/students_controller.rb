@@ -62,10 +62,13 @@ class StudentsController < ApplicationController
   end
 
   def courses
+    @student = Student.find(params[:id])
     @courses = @student.courses
   end
 
   def course_add
+    #Convert ids from routing to objects
+    @student = Student.find(params[:id])
     @course = Course.find(params[:course])
 
     unless @student.enrolled_in?(@course)
@@ -74,13 +77,16 @@ class StudentsController < ApplicationController
     else
       flash[:error] = 'Student was already enrolled'
     end
-    redirect_to :action => :courses, id => @student
+    redirect_to action: "courses", id: @student
   end
 
   def course_remove
-    @course_ids = params[:courses]
+    #Convert ids from routing to objects
+    @student = Student.find(params[:id])
+    course_ids = params[:courses]
     
     unless course_ids.blank?
+    # get list of courses to remove from query string
       course_ids.each do |course_id|
         course = Course.find(course_id)
         if @student.enrolled_in?(course)
@@ -90,9 +96,9 @@ class StudentsController < ApplicationController
         end
       end
     end
-    redirect_to :action => :courses, :id => @student
+    redirect_to action: "courses", id: @student
   end
-    
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
