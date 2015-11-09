@@ -320,14 +320,14 @@ Now that the models are connected, add some convenience methods to the **Student
 This will return `true` if a given course is in the student's course list. Next, create a similar method that shows which courses a student is *not* enrolled in:
 
 		def unenrolled_courses
-			Course.find(:all) - self.courses
+			Course.all - self.courses
 		end
 
 This method returns the list of courses that remains after *subtracting* those which already belong to a student. 
 		
 ####"Adding to the Controllers"
 
-The next step is to supplement the existing RESTful interfaces in the controllers by adding methods that will add to their functionality. In *app/controllers/students_controller.rb*, add a method to determine which courses belong to the current student. The **@student** instance variable has already been defined in the private `set_student` method. Just after this method, add the following code:
+The next step is to supplement the existing RESTful interfaces in the controllers by adding methods that will add to their functionality. In *app/controllers/students_controller.rb*, add a method to determine which courses belong to the current student. The **@student** instance variable has already been defined in the private `set_student` method. Just after the `destroy` method, add the following code:
 
 		def courses
 			@courses = @student.courses
@@ -367,7 +367,17 @@ Next, the `course_remove` method will be used to "unenroll" a student from a cou
 
 ####"Adding Routing"
 
+In the text editor, open *config/routes.rb* and add the routing which will allow rails to find the new course methods. The updated *resources* block for **students** will look like this:
 
+		resources :students do
+			resources :awards
+
+			member do
+				get :courses
+				post :course_add
+				post :course_remove
+			end
+		end
 
 ####"Supporting the Relationship Through Views"
 #####"Establishing navigation"
@@ -388,6 +398,86 @@ To render the partial across all views, add the following statement to *app/view
 		<%= render 'navigation' %>
 
 		<%= yield %>
+
+#####"Showing counts"
+
+Just as *app/views/students/index.html.erb* displays a count for the student's awards, a count for their courses can also be listed. In the view's `<thead>` block, add the following heading just before `<th>Awards</th>`:
+
+		<th>Courses</th>
+
+Now add the following table cell just before the `student.awards.count` cell:
+
+		<td><%= student.courses.count %></td>
+
+Similarly, in *app/views/courses/index.html.erb*, add the following table heading just after the "Name" heading:
+
+		<th>Enrolled</th>
+
+And just after the table cell for `course.name`, add the following..
+
+		<td><%= course.students.count %></td>
+
+#####"Enrolling students in courses"
+
+In *app/views/students/show.html.erb*, just before the `<h3>Awards</h3>` statement, add the following block of code that will display the student's courses (if they have any):
+
+		<p>
+			<strong>Courses:</strong>
+			<% if !@student.courses.empty? %>
+				<%= @student.courses.collect {|c| link_to(c.name, c)}.join(", ").html_safe %>
+			<% else %>
+				Not enrolled in any courses yet.
+			<% end %>
+		</p>
+
+Next, add another `link_to` statement to the others at the bottom of the file:
+
+		<%= link_to 'Courses', courses_student_path(@student) %>
+
+Before the above "Courses" link can be used, the view must be created. Create the file *app/views/students/courses.html.erb*, like this:
+
+		<h1><%= @student.name %>'s courses</h1>
+
+		<% if @courses.length > 0 %>
+			<%= form_tag(course_remove_student_path(@student)) do %>
+		<table>
+		  <thead>
+			<tr>
+			<th>Course</th>
+			<th>Remove?</th>
+			</tr>
+		  </thead>
+
+		  <tbody>
+			<% for course in @courses do %>
+			<tr>
+			<td><%= course.name %></td>
+			<td><%= check_box_tag "courses[]", course.id %></td>
+			</tr>
+			<% end %>
+		  </tbody>
+		</table>
+
+		<br />
+			<%= submit_tag 'Remove checked courses' %>
+		<% end %>
+		<% else %>
+			<p>Not enrolled in any courses yet.</p>
+		<% end %>
+
+		<h2>Enroll in new course</h2>
+		<% if @student.courses.count < Course.count then %>
+			<%= form_tag(course_add_student_path(@student)) do %>
+			<%= select_tag(:course, options_from_collection_for_select(@student.unenrolled_courses, :id, :name)) %>
+			<%= submit_tag 'Enroll' %>
+			<% end %>
+		<% else %>
+			<p><%= @student.name %> is enrolled in every course.</p>
+		<% end %>
+		<p><%=link_to "Back", @student %></p>
+
+
+
 
 
 		
