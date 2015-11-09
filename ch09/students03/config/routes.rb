@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   
-  resources :courses
-  
+  resources :courses do
+  	member do
+  		get :roll
+  	end
+  end
+
   resources :students do
 		resources :awards
 
