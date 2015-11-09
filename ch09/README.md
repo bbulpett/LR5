@@ -333,7 +333,15 @@ This method returns the list of courses that remains after *subtracting* those w
 		
 ####"Adding to the Controllers"
 
-The next step is to supplement the existing RESTful interfaces in the controllers by adding methods that will add to their functionality. In *app/controllers/students_controller.rb*, add a method to determine which courses belong to the current student. Just after the `destroy` method, add the following code:
+The next step is to supplement the existing RESTful interfaces in the controllers by adding methods that will add to their functionality. 
+
+*app/controllers/courses_controller.rb* needs just one extra method, **roll**, which when provided the appropriate view (*app/views/courses/roll.html.erb*) will list the students enrolled in the course. Add the method to the *courses_controller*:
+
+		def roll
+			@course = Course.find(params[:id])
+		end
+
+In *app/controllers/students_controller.rb*, add a method to determine which courses belong to the current student. Just after the `destroy` method, add the following code:
 
 		def courses
 			@student = Student.find(params[:id])
@@ -385,6 +393,14 @@ In the text editor, open *config/routes.rb* and add the routing which will allow
 				get :courses
 				post :course_add
 				post :course_remove
+			end
+		end
+
+In addition, **courses** needs routing to connect to the view for the added *roll* method. The syntax for this route is as follows:
+
+		resources :courses do
+			member do
+				get :roll
 			end
 		end
 
@@ -485,8 +501,4 @@ Before the above "Courses" link can be used, the view must be created. Create th
 		<% end %>
 		<p><%=link_to "Back", @student %></p>
 
-
-
-
-
-		
+	
