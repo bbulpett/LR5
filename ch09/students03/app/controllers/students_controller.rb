@@ -61,6 +61,38 @@ class StudentsController < ApplicationController
     end
   end
 
+  def courses
+    @courses = @student.courses
+  end
+
+  def course_add
+    @course = Course.find(params[:course])
+
+    unless @student.enrolled_in?(@course)
+      @student.courses << @course
+      flash[:notice] = 'Student was successfully enrolled'
+    else
+      flash[:error] = 'Student was already enrolled'
+    end
+    redirect_to :action => :courses, id => @student
+  end
+
+  def course_remove
+    @course_ids = params[:courses]
+    
+    unless course_ids.blank?
+      course_ids.each do |course_id|
+        course = Course.find(course_id)
+        if @student.enrolled_in?(course)
+          logger.info "Removeing student from course #{course.id}"
+          @student.courses.delete(course)
+          flash[:notice] = 'Course was successfully deleted'
+        end
+      end
+    end
+    redirect_to :action => :courses, :id => @student
+  end
+    
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
