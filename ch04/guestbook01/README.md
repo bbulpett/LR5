@@ -45,3 +45,6 @@ Add the following line, just before the final `end` statement:
 	def sign_in
 		@name = params[:visitor_name]
 	end
+
+The "sign in" page can now be viewed in the browser at localhost:3000/entries/sign_in
+

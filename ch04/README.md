@@ -46,6 +46,8 @@ Add the following line, just before the final `end` statement:
 		@name = params[:visitor_name]
 	end
 
+The "sign in" page can now be viewed in the browser at localhost:3000/entries/sign_in
+
 ####"Keeping Track: A Simple Guestbook (guestbook02)"
 Run this command at the terminal:
 
