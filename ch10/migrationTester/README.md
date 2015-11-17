@@ -87,5 +87,39 @@ This produces a file (*db/migrate/20151110012135_create_book.rb*) with the follo
 
 The columns may then be added within the **create_table** method, as above, prefixed with **t.**
 
+Just as columns can be added to a migration generated with scaffolding, these attributes can also be specified when generating a simple table like the one above. The following command generates the **Books** table with some basic columns:
+
+		rails generate migration CreateBookWithColumns title:string author:string isbn:integer price:float published_date:date
+
+..which produces the following migration file (*db/migrate/20151117015213_create_book_with_columns*):
+
+		class CreateBookWithColumns < ActiveRecord::Migration
+			def change
+				create_table :book_with_columns do |t|
+					t.string :title
+					t.string :author
+					t.integer :isbn
+					t.float :price
+					t.date :published_date
+				end
+			end
+		end
+
+#####"Data Types"
+
+Before a migration is run, named parameters can be added to columns depending on their data type. For example, one might edit the preceding migration to read as follows:
+
+		class CreateBookWithColumns < ActiveRecord::Migration
+			def change
+				create_table :book_with_columns do |t|
+					t.string :title, limit: 100 ### entries will be limited to 100 characters and cannot be left empty
+					t.string :author, limit: 45 ### entries will be limited to 45 characters
+					t.integer :isbn, limit: 13 ### entries will be limited to 13 characters
+					t.decimal :price, precision: 6, scale: 2 ### entries will follow the format "xxxx.xx"
+					t.date :published_date, default: Date.today ### this sets the default value to today's date. However, this is not automatically persisted to the model and will be overwritten with user-entered data.
+				end
+			end
+		end
+
 
 		
