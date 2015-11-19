@@ -121,5 +121,35 @@ Before a migration is run, named parameters can be added to columns depending on
 			end
 		end
 
+#####"Working with Columns"
+
+Once the application has been established, table columns may still be added, removed, or changed with a standalone migration. For instance, if the **Books** table created in the previous section needed to specify the language in which books are written, simply create a migration with `rails g migration AddLanguageToBooks language:string`, which creates the following file (*20151119000940_add_language_to_book.rb*):
+
+		class AddLanguageToBook < ActiveRecord::Migration
+			def change
+				add_column :books, :language, :string
+			end
+		end
+
+Columns that are deemed to be unnecessary can be removed in similar fashion. A command such as the following will do the trick: `rails g migration RemovePublished_dateFromBooks published_date:date`. The following file is created (*201511190001942_remove_published_date_from_books.rb*):
+
+        class RemovePublishedDateFromBooks < ActiveRecord::Migration
+          def change
+            remove_column :books, :published_date, :date
+          end
+        end
+
+There are also "plural" versions of these methods - **add_columns** and **remove_columns** to speed up the alteration of multiple columns at once. Similarly, existing columns can easily be changed. For example, if the price of books were to skyrocket, one could create a migration with `rails g migration alter_column_books_price`. This will generate a migration file with an empty **change** method, wherein the column may be redefined (*20151119004306_alter_column_books_price.rb*)...
+
+        class AlterColumnBooksPrice < ActiveRecord::Migration
+          def change
+            change_column :books, :price, precision: 7, scale: 2
+          end
+        end
+
+
+There are a multitude of instance methods and transformations available for ActiveRecord migrations. More information can be found at *http://edgeguides.rubyonrails.org/active_record_migrations.html* and *http://apidock.com/rails/ActiveRecord/Migration*.
+
+
 
 		
