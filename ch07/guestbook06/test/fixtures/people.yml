@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  secret: MyString
+  country: MyString
+  email: MyString
+  description: MyText
+  can_send_email: false
+  graduation_year: 1
+  body_temperature: 1.5
+  price: 9.99
+  birthday: 2015-10-04
+  favorite_time: 2015-10-04 20:37:42
+
+two:
+  name: MyString
+  secret: MyString
+  country: MyString
+  email: MyString
+  description: MyText
+  can_send_email: false
+  graduation_year: 1
+  body_temperature: 1.5
+  price: 9.99
+  birthday: 2015-10-04
+  favorite_time: 2015-10-04 20:37:42
