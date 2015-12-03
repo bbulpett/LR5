@@ -10,8 +10,8 @@ one:
   graduation_year: 1
   body_temperature: 1.5
   price: 9.99
-  birthday: 2015-10-17
-  favorite_time: 2015-10-17 09:56:30
+  birthday: 2015-10-04
+  favorite_time: 2015-10-04 20:37:42
 
 two:
   name: MyString
@@ -23,5 +23,5 @@ two:
   graduation_year: 1
   body_temperature: 1.5
   price: 9.99
-  birthday: 2015-10-17
-  favorite_time: 2015-10-17 09:56:30
+  birthday: 2015-10-04
+  favorite_time: 2015-10-04 20:37:42

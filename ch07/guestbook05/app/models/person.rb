@@ -53,14 +53,14 @@ class Person < ActiveRecord::Base
   validates_numericality_of :price, :allow_nil => true,
     :only_integer => false
 
-  # restrict birthday to reasonable values, ie. not in the future and not
+  # restrict birthday to reasonable values, ie. not in the future and not
   # before 1900
   validates_inclusion_of :birthday,
     :in => Date.civil(1900, 1, 1) .. Date.today,
     :message => "must be between January 1st, 1900 and today"
 
   # finally, we just say that favorite time is mandatory. while the view
-  # only allows you to post valid times, remember that models can be created
+  # only allows you to post valid times, remember that models can be created
   # in other ways, such as from code or web service calls. so it's not safe
   # to make assumptions based on the form
   validates_presence_of :favorite_time
