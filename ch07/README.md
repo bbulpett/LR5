@@ -123,3 +123,43 @@ Using validations to test whether a date falls within a specific range is simila
 Just like the **:name** field above, we add the following line to ensure that the **:favorite_time** field contains an entry:
 
 		validates_presence_of :favorite_time
+
+###"Beyond Simple Declarations"
+
+Open the guestbook application in the text editor.
+<sub>Alternatively, a new app can be created (i.e. "guestbook05") that is identical to _ch06/guestbook04_.</sub>
+
+#####"Test It Only If"
+
+In *app/models/person.rb*, create a new line after the last validation and add the following validation:
+
+		validates_presence_of :description, :if => :require_description_presence?
+
+		def require_description_presence?
+			self.can_send_email
+		end
+
+The above validation will be conducted only **if** the boolean *"can_send_email"* field is TRUE. If it is, then the _description_ field will be required.
+
+#####"Do It Yourself"
+
+Adding a custom validation requires creating a method for the validation logic and then calling that method using **validate**. In addition, we tell rails what error message to display with the **self.errors.add** method.
+
+Add the following validation to *app/models/person.rb*:
+
+		validate :description_length_words
+
+Before this validation will work, however, the method must be defined. Add the following code to create a method that validates the length (in words) of the description field:
+
+		def description_length_words
+			unless self.description.blank? then
+				num_words = self.description.split.length
+				if num_words < 5 then
+					self.errors.add(:description, "must be at least 5 words long")
+				elsif num_words > 50 then
+					self.errors.add(:description, "cannot be longer than 50 words")
+				end
+			end
+		end
+
+Save the file and test the validations in the browser. Provided the description is between 5 and 50 words long, no error should appear and the *Person* will be created.
