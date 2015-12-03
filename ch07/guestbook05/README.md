@@ -1,126 +1,161 @@
-#LR5
-##Chapter 7
-###"Strengthening Models with Validation"
+# LR5
 
-Validation is a way to ensure that only appropriate data is stored in the application's database. Although _client-side_ validations can easily be done with HTML5 or javascript, this approach is less secure than the _server-side_ validations that we will now add to our Rails models.
+## Chapter 6
 
-To begin, open last app from Chapter 6 (guestbook04) in the text editor.
+#### "Presenting Models with Forms"
 
-<sub>Alternatively, a new app can be created (i.e. "guestbook05") that is identical to _ch06/guestbook04_.</sub>
-####"The Original Model"
+At the terminal, run the following command to create a new application:
 
-As we first discussed in chapter 4 (_ch04/guestbook02_), the attributes for models we create are defined (as "required" or "permitted") in the associated controller. Therefore, in **app/models/person.rb** we find an empty model declaration that looks like this:
+	rails new guestbook
 
-		class Person < ActiveRecord::Base
+Enter the following to create scaffolding for the app with a basic data structure:
+
+	rails generate scaffold Person name:string secret:string country:string email:string description:text can_send_email:boolean graduation_year:integer body_temperature:float price:decimal birthday:date favorite_time:time
+
+Now run `rake db:migrate` to implement the migration created with the scaffold generator. Note that just like the last exercise, the *people_controller* has been generated complete with strong parameters - defined in a private method called *person_params*. This time, however, the person model can accept all of the attributes we specified when running the *rails generate scaffold* command.
+
+Open *localhost:3000/people* in the browser to start the new application. Click the "New Person" link to view the form that Rails has generated to create a new "person" object. The code for this form, in *app/views/people/_form.html.erb*, uses the Rails method `form_for`, which automatically binds the input values to the Person model.
+
+#### "Creating Text Fields and Text Areas"
+
+In a text editor, open *app/views/people/_form.html.erb* and locate the following block of code:
+
+	<div class="field">
+    		<%= f.label :secret %><br>
+    		<%= f.text_field :secret %>
+	</div>
+
+Change the code so that the "secret" attribute uses the *password_field* method:
+
+	<%= f.password_field :secret %>
+
+This will display asterisks (or dots, depending on browser defaults or any style modifications) when the user enters their "secret" criteria.
+
+To change the size of the description's *text_area*, change that line of code to look like this:
+
+	<%= f.text_area :description, :cols => 30, :rows => 10 %>
+
+Demonstrating another option that Rails supports for text fields, locate the "graduation year" attribute and make it a *hidden* field:
+
+	<%= f.hidden_field :graduation_year %>
+
+	*NOTE*: hidden fields are not particularly useful in forms that create new objects,
+	 but can come in useful elsewhere in your applications. Also note that the *label* 
+	 for this field remains on the form. To completely hide the field in the view, 
+	 simply delete the label on the hidden field.
+
+#### "Labels"
+
+In the div that contains the "name" field, change the text that will display above the text field. Change the following line:
+
+	<%= f.label :name %><br />
+
+by adding a comma and then the string (in quotes) to be displayed:
+
+	<%= f.label :name, 'Your name' %>
+
+#### "Creating Checkboxes"
+
+Scaffolding has generated all of our app's checkbox functionality. Refer to the text for explanation of options for **check_box** method.
+
+#### "Creating Radio Buttons"
+
+Open *app/views/people/_form.html.erb* in the text editor and locate the input field for the *country* attribute (starting around line 24). Delete this block of code (or surround it with HTML comment tags <!-- -->). In its place, enter the following code block to create a specific list of linked radio buttons:
+
+	<fieldset>
+	<legend>Country</legend>
+	<%= f.radio_button :country, 'USA' %> <%= f.label "person_country_usa", "USA" %><br> 
+	<%= f.radio_button :country, 'Canada' %> <%= f.label "person_country_canada", "Canada" %><br> 
+	<%= f.radio_button :country, 'Mexico' %> <%= f.label "person_country_mexico", "Mexico" %><br>
+	</fieldset>
+
+Refresh the "New Person" form in the browser to view the set of radio buttons Rails has created. Next, endeavoring to keep the code DRY, create some whitespace just above the `<fieldset>` tag you just created and enter the following **hash**:
+
+	<% nations = { 'United States of America' => 'USA', 'Canada' => 'Canada', Mexico' => 'Mexico', 'United Kingdom' => 'UK' }%>
+
+This also allows us to use more descriptive naming for the button descriptions in the view while saving the chosen entry as an abbreviation for efficiency.
+**NOTE:** A hash of values like this would normally be created in the controller and referenced here in the view.
+
+To use the hash we just created, we must now modify the contents of the `<fieldset>`. Delete (or comment) the <fieldset> code block and replace it with the following:
+
+	<fieldset>
+	    <legend>Country</legend>
+	    <% list = nations.sort 
+	    list.each {|x| %>
+	      <%= f.radio_button :country, x[1] %>
+	 	<label for="<%= ("person_country_" + x[1].downcase) %>"><%= x[0] %>
+		</label><br> 
+	    <% } %>
+  	</fieldset>
+
+Save the file and refresh the browser to see the new form in action.
+
+#### "Dates and Times"
+
+Scaffolding has generated all of our app's date and time selection. Refer to the text for explanation of time selector methods, helper methods, and options.
+
+#### "Creating Helper Methods"
+
+Open *app/helpers/people_helper.rb* in the text editor. The **buttons** method will help to simplify the radio button code in the form view. Create the method by defining it in the "PeopleHelper" module, like this:
+
+	module PeopleHelper
+		def buttons(model_name, target_property, button_source)
+			html=''
+			list = button_source.sort
+			html << '<fieldset><legend>Country</legend>'
+			list.each {|x|
+				html << radio_button(model_name, target_property, x[1])
+				html << (x[0])
+				html << '<br>'
+			}
+			html << '</fieldset>'
+			return html.html_safe
 		end
+	end
 
-However, in **app/controllers/people_controller.rb**, we find the following method appended to the end of the file:
+Returning to the *_form.html.erb* file, comment (or delete) the entire `<fieldset>` code block, including the `<fieldset>` tags themselves. Don't remove the "nations" hash, it is still needed. In place of this block, insert the following line of code:
 
-		# Never trust parameters from the scary internet, only allow the white list through.
-	    	def person_params
-	      		params.require(:person).permit
-			(:name, :secret, :country, :email, :description, :can_send_email, :graduation_year, :body_temperature, :price, :birthday, :favorite_time)
-	    	end
+	<%= buttons(:person, :country, nations) %>
 
-Having these attributes abstracted to the controller enhances the security of our data and provides a clean slate to work with the model itself.
+This basically passes values from the *nations* hash to the *person* model's *country* property, using the new *buttons* method. It uses the exact order of arguments that were defined in the above method. The method uses an `each` loop to list all the values from the "nations" hash.
+
+**Optionally**, a helper method could be created to conditionally represent the hash values as a list instead of radio buttons. This might be useful if there were too many buttons, cluttering the view. This method would look like this:
+
 	
-####"The Power of Declarative Validation (guestbook05)"
+	def button_select(model_name, target_property, button_source)
+		html=''
+		list = button_source.sort
 
-In the text editor, open _app/models/person.rb_. Create a little whitespace between the `class Person...` line and the `end` statement. Add the following line of code to mandate the inclusion of the "name" attribute when creating a new **Person** model:
+		if list.length < 4
+			html << '<fieldset><legend>Country</legend>'
+			list.each {|x|
+				html << radio_button(model_name, target_property, x[1])
+				html << (x[0])
+				html << '<br>'
+			}
+			html << '</fieldset>'
+		else
+			html << ' <label for="person_country">Country</label><br>'
+			html << select(model_name, target_property, list)
+		end
+		return html.html_safe
+	end
 
-		validates_presence_of :name
+Note that in the view, the helper method call (`<%= buttons(...) %>`) would need to be changed to `<%= button_select(...) %>` to use this method.
 
-Save the file, then navigate to _localhost:3000/people_ in the browser. Click the "New Person" link to bring up the form. Fill out the form, but **leave the "name" field blank**. When the _Create Person_ button is clicked, the transaction begins, but is unsuccessful. Rails immediately "rolls back" the transaction and issues an error, "Name can't be blank", which comes from `<div id="error_explanation">` in the _app/views/people/\_form_ partial. 
 
-####"Managing Secrets"
+	
 
-The **:secret** field is a good place to demonstrate multiple validations.
 
-######"Customizing the Message"
 
-In the text editor, open _app/models/person.rb_. Just after the new validation for the presence of the _:name_ field, add the following line to provide a "friendly" error message should the **:secret** field be left blank:
-		
-		# make the secret mandatory and provide a customized message
-		validates_presence_of :secret, 
-			:message => "must be provided so we can recognize you in the future"
 
-Add the following validations to test the actual _content_ of the **:secret** entry.
 
-		# ensure secret has enough letters, but not too many
-		validates_length_of :secret, :in => 6..24
 
-		# ensure secret contains at least one number
-		validates_format_of :secret, :with => /[0-9]/,
-			:message => "must contain at least one number"
 
-		# ensure secret contains at least one upper case letter
-		validates_format_of :secret, :with => /[A-Z]/,
-			:message => "must contain at least one upper case character"
 
-		# ensure secret contains at least one lower case letter
-		validates_format_of :secret, :with => /[a-z]/,
-			:message => "must contain at least one lower case character"
 
-Save the changes to _person.rb_ and restart the Rails server. As before, navigate to the "New Person" form in the browser and fill in the form. Test the above validations in the "secret" field. Notice that leaving the field empty will trigger _all_ of the validation messages upon submitting the form.
 
-#####"Limiting Choices"
 
-Returning to _app/models/person.rb_, we can add the following validation to ensure that the value is one of the choices in an array:
 
-		validates_inclusion_of :country,
-			:in => ['Canada', 'Mexico', 'UK', 'USA'],
-			:message => "must be one of Canada, Mexico, UK, or USA"
 
-#####"Testing Format with Regular Expressions"
-
-Regular expressions can be used in validations to ensure that the input matches a specific format.
-
-		validates_format_of :email, 
-			:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-			:message => "doesn't look like a proper email address"
-
-#####"Seen It All Before"
-
-Validating whether a value matches a record already in the database can be useful when dealing with usernames, user emails, and other criteria. 
-
-		validates_uniqueness_of :email, :case_sensitive => false,
-			:message => "has already been entered, you can't sign in twice"
-
-This checks **:email** against the "email" database column. To check **:email** against additional columns (as well as the "email" column), we use the **:scope** property. For example, the following validation also checks if the entry exists in the **:name** or **:secret** columns:
-
-		validates_uniqueness_of :email, :case_sensitive => false,
-			:scope => [:name, :secret],
-			:message => "has already been entered, you can't sign in twice"
-
-#####"Numbers Only"
-
-The Rails *validates_numericality_of* method, as its name implies, checks if the input is a number. A wide variety of parameters may be included to test for specific numeric values. Add the following line to _app/models/person.rb_ to test the "graduation_year" value:
-
-		validates_numericality_of :graduation_year, :allow_nil => true,
-			:greater_than => 1920,
-			:less_than_or_equal_to => Time.now.year,
-			:only_integer => true
-
-To further exemplify Rails numeric validations, add the following lines of code to validate "body_temperature" and "price":
-
-		validates_numericality_of :body_temperature, :allow_nil => true,
-			:greater_than_or_equal_to => 60,
-			:less_than_or_equal_to => 130, :only_integer => false
-
-		validates_numericality_of :price, :allow_nil => true,
-			:only_integer => false
-
-#####"A Place on the Calendar"
-
-Using validations to test whether a date falls within a specific range is similar to checking a value in an array ("Limiting Choices"). Again, we use the *validates_inclusion_of* method, but this time referencing methods of Ruby's *Date* class:
-		
-		validates_inclusion_of :birthday,
-			:in => Date.civil(1900, 1, 1) .. Date.today,
-			:message => "must be between January 1st, 1900 and today"
-
-#####"Testing for Presence"
-
-Just like the **:name** field above, we add the following line to ensure that the **:favorite_time** field contains an entry:
-
-		validates_presence_of :favorite_time
 
