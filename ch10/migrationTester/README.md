@@ -150,6 +150,43 @@ There are also "plural" versions of these methods - **add_columns** and **remove
 
 There are a multitude of instance methods and transformations available for ActiveRecord migrations. More information can be found at *http://edgeguides.rubyonrails.org/active_record_migrations.html* and *http://apidock.com/rails/ActiveRecord/Migration*.
 
+#####"Indexes"
 
+Rails is set up so that databases automatically index the **id** column of a table. If a table has other columnns that will be regularly searched, such as foreign key columns used in join tables, adding an index can speed up those searches. Indices can be added in a number of ways. Perhaps the most common method is to add it when generating the table. For instance, in Chapter 9 we generated the following *join table*, which included indices for both tables:
 
+        class CreateJoinTableCourseStudent < ActiveRecord::Migration
+          def change
+            create_join_table :courses, :students do |t|
+              t.index [:course_id, :student_id]
+              t.index [:student_id, :course_id]
+            end
+          end
+        end
+
+Perhaps the above **Books** table could also use an index to speed the search of volumes by their ISBN numbers. This could have been added easily by adding **add_index** to the migration used to create the table..
+
+      
+        class CreateBookWithColumnsAndIndex < ActiveRecord::Migration
+          def change
+            create_table :book_with_columns do |t|
+              t.string :title
+              t.string :author
+              t.integer :isbn
+              t.float :price
+              t.date :published_date
+            end
+
+            add_index :book_with_columns, :isbn
+          end
+        end
+        
+The `add_index` method (and its counterpart, `remove_index`) is quite versatile in that it can be added to virtually any migration, even by itself in a "standalone" migration. Indices may also be created via the addition of a boolean parameter within a column definition. For example, the following migration adds a column to store a "slug" (human readable id) for posts in a blog application..
+
+        class AddSlugToPosts < ActiveRecord::Migration
+          def change
+            add_column :posts, :slug, :string, index: true
+          end
+        end
+
+This simple migration was created with the command `rails g migration AddSlugToPosts`. Then, in the text editor, `index: true` is added to the new column's parameter list. Remember that indices should always be added only *after* their respective tables and columns already exist. This way, the index can be removed without error by using the `rake db:rollback` command.
 		
