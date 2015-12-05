@@ -152,7 +152,7 @@ There are a multitude of instance methods and transformations available for Acti
 
 #####"Indexes"
 
-Rails is set up so that databases automatically index the **id** column of a table. If a table has other columnns that will be regularly searched, such as foreign key columns used in join tables, adding an index can speed up those searches. Indices can be added in a number of ways. Perhaps the most common method is to add it when generating the table. For instance, in Chapter 9 we generated the following *join table*, which included indices for both tables:
+Rails is set up so that databases automatically index the **id** column of a table. If a table has other columnns that will be regularly searched, such as foreign key columns used in join tables, adding an index can speed up those searches. Indexes can be added in a number of ways. Perhaps the most common method is to add it when generating the table. For instance, in Chapter 9 we generated the following *join table*, which included indexes for both tables:
 
         class CreateJoinTableCourseStudent < ActiveRecord::Migration
           def change
@@ -180,7 +180,7 @@ Perhaps the above **Books** table could also use an index to speed the search of
           end
         end
         
-The `add_index` method (and its counterpart, `remove_index`) is quite versatile in that it can be added to virtually any migration, even by itself in a "standalone" migration. Indices may also be created via the addition of a boolean parameter within a column definition. For example, the following migration adds a column to store a "slug" (human readable id) for posts in a blog application..
+The `add_index` method (and its counterpart, `remove_index`) is quite versatile in that it can be added to virtually any migration, even by itself in a "standalone" migration. Indexes may also be created via the addition of a boolean `index` modifier within a column definition. For example, the following migration adds a column to store a "slug" (human readable id) for posts in a blog application..
 
         class AddSlugToPosts < ActiveRecord::Migration
           def change
@@ -188,5 +188,64 @@ The `add_index` method (and its counterpart, `remove_index`) is quite versatile 
           end
         end
 
-This simple migration was created with the command `rails g migration AddSlugToPosts`. Then, in the text editor, `index: true` is added to the new column's parameter list. Remember that indices should always be added only *after* their respective tables and columns already exist. This way, the index can be removed without error by using the `rake db:rollback` command.
+This simple migration was created with the command `rails g migration AddSlugToPosts`. Then, in the text editor, `index: true` modifier is added to the new column's parameter list. Remember that indexes should always be added only *after* their respective tables and columns already exist. This way, the index can be removed without error by using the `rake db:rollback` command.
+
+#####"Other Opportunities"
+
+Among the many available transformation methods available to Rails migrations are:
+
+        add_belongs_to
+        add_column
+        add_foreign_key
+        add_index
+        add_index_options
+        add_index_sort_order
+        add_reference
+        add_timestamps
+        assume_migrated_upto_version
+        change_column
+        change_column_default
+        change_column_null
+        change_table
+        column_exists?
+        columns
+        columns_for_distinct
+        create_alter_table
+        create_join_table
+        create_table
+        create_table_definition
+        drop_join_table
+        dump_schema_information
+        foreign_key_column_for
+        foreign_key_name
+        foreign_keys
+        index_exists?
+        index_name
+        index_name_exists?
+        index_name_for_remove
+        initialize_schema_migrations_table
+        native_database_types
+        options_include_default?
+        quoted_columns_for_index
+        remove_belongs_to
+        remove_column
+        remove_columns
+        remove_foreign_key
+        remove_index
+        remove_index!
+        remove_reference
+        remove_timestamps
+        rename_column
+        rename_column_indexes
+        rename_index
+        rename_table
+        rename_table_indexes
+        table_alias_for
+        table_exists?
+        type_to_sql
+        update_table_definition
+        validate_index_length!
+
+With each version of Rails this list changes and it should be noted that some of these methods are seldom actually used. Nonetheless, it is clear that there are a great many tasks, from managing database connections to renaming a simple column, that can be automated using Rails migrations. A good reference on the usage of these methods can be found at *http://apidock.com/rails*.
+
 		
