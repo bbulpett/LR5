@@ -1,0 +1,5 @@
+<h1>New Award for <%= @student.name%></h1>
+
+<%= render 'form', award: @award %>
+
+<%= link_to 'Back', student_awards_path(@student) %>
