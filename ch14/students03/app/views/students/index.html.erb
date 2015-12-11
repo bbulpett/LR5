@@ -30,7 +30,7 @@
         <td><%= student.awards.count %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Awards', student_awards_path(student) %></td>
-        <% if current_user %>
+        <% if current_user.admin? %>
           <td><%= link_to 'Edit', edit_student_path(student) %></td>
           <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
@@ -41,4 +41,6 @@
 
 <br>
 
-<%= link_to 'New Student', new_student_path %>
+<% if current_user.admin? %>
+  <%= link_to 'New Student', new_student_path %>
+<% end %>
