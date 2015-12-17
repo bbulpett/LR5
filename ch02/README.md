@@ -42,3 +42,6 @@ Then modify app/views/hello/index.html.erb:
 	<% end %>
 Save the file and refresh the browser.
 
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

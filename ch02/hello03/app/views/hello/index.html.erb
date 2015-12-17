@@ -3,3 +3,14 @@
 <% for i in 1..@count %>
 	<p><%= @bonus %></p>
 <% end %>
+
+<!-- Alternate syntaxes for the above loop -->
+<!--
+	<% @count.times do %>
+		<p><%= @bonus %></p>
+	<% end %>
+
+	<% @count.times { %>
+		<p><%= @bonus %></p>
+	<% } %>
+-->

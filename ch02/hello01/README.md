@@ -21,3 +21,6 @@ Change app/views/hello/index.html.erb to read as follows:
     <p>This is a greeting from app/views/hello/index.html.erb</p>
 		
 Save the file and refresh the browser.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

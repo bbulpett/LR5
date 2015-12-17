@@ -22,3 +22,6 @@ Then modify app/views/hello/index.html.erb:
     <p><%= @bonus %></p>
     
 Save the files and refresh the browser.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

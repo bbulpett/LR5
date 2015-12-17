@@ -16,3 +16,6 @@ Change the contents of this file to the following:
     <% end %>
 	
 Save the file and refresh the browser.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>
