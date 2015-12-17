@@ -10,4 +10,4 @@ Here, `new` is the command which creates a new application and `hello` will be t
 
 `~/projects/hello$ rails server`
 
-~tested for reconciliation with changes made to book text~
+<sup>tested for reconciliation with changes made to book text</sup>
