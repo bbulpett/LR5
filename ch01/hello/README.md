@@ -7,5 +7,6 @@ Here, `new` is the command which creates a new application and `hello` will be t
 
 `~/projects/hello$ rails server`
 
+
 ***
-<sup>tested for reconciliation with changes made to book text</sup>
+<sup>Tested and reconciled with changes made to book text</sup>
