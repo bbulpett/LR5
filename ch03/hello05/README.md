@@ -14,3 +14,6 @@ Add the following line to the space between the `<body>` tag and the `<%= yield 
 	<p>(using hello layout)</p>
 
 Save changes to the file and refresh the browser.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

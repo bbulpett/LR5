@@ -15,3 +15,6 @@ _The following steps were used to recreate the Learning Rails 3 files within Rub
     	}
 		
 Save the updated stylesheet and refresh browser window.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

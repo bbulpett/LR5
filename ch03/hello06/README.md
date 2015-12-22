@@ -21,3 +21,6 @@ Now create a new html.erb file in the app/views/layouts folder called standardLa
 	<p>(using standard layout)</p>
 
 Save the new file and refresh the browser to see changes.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

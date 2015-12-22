@@ -74,3 +74,6 @@ Save the file and refresh the browser to see the ordered list of the bonus messa
 
 ## IMPORTANT NOTE:
 "Setting a Default Page" has been intentionally omitted. The default page has already been set in Chapter 1 (hello01), where the line `root 'hello#index'` defined the default page (root) of the site. Rails 5 no longer uses the syntax _`root :to => "hello#index"`_.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>
