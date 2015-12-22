@@ -10,7 +10,7 @@ class EntriesController < ApplicationController
 	end
 	
 	private
-	def entry_params
-		params.require(:entry).permit(:name)
-	end
+		def entry_params
+			params.require(:entry).permit(:name)
+		end
 end

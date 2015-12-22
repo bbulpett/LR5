@@ -53,3 +53,6 @@ To display the contents of the above array, append the following code to the vie
 	</ul>
 
 Restart the server and refresh the browser.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

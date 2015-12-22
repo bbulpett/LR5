@@ -48,3 +48,6 @@ Add the following line, just before the final `end` statement:
 
 The "sign in" page can now be viewed in the browser at localhost:3000/entries/sign_in
 
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>
