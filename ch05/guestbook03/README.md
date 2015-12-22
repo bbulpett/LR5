@@ -30,4 +30,5 @@ NOTE: The scaffolding has added a Person model represented by the _person.rb_ fi
 
 This method achieves the same as the one added to the *guestbook02* app in chapter 4. Scaffolding has created this for us automatically.
 
-
+***
+<sup>Tested and reconciled with changes made to book text</sup>
