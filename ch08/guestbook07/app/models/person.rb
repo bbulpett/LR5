@@ -94,6 +94,8 @@ class Person < ActiveRecord::Base
   end
 
   # callback method to store photo after validation
+  # after the person has been written to the database, deal with
+  # writing any image data to the filesystem
   after_save :store_photo
 
   # when photo data is assigned via the upload, store the file data

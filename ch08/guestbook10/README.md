@@ -347,3 +347,6 @@ Lastly, add the following styles to *app/assets/stylesheets/people.scss*:
 			}
 
 Restart the rails server and navigate to `localhost:3000/people`. Click the "New Person" link to see the changes to the form.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

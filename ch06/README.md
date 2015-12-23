@@ -143,19 +143,5 @@ This basically passes values from the *nations* hash to the *person* model's *co
 
 Note that in the view, the helper method call (`<%= buttons(...) %>`) would need to be changed to `<%= button_select(...) %>` to use this method.
 
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+***
+<sup>Tested and reconciled with changes made to book text</sup>

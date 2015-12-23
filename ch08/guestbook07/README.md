@@ -132,3 +132,5 @@ In the text editor, open *app/views/people/show.html.erb* and add the following 
 
 Start the rails server (`rails s`) and navigate in the browser to _localhost:3000/people_. Use the form to create a new **Person** model with a photo attached. Once created, the model will be available on the index page. Select the **Show** link to view the updated **Person** display, as created in the previous section ("Showing It Off").
 
+***
+<sup>Tested and reconciled with changes made to book text</sup>

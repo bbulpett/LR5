@@ -243,3 +243,6 @@ Other helpers are slightly more complex..
 		end
 
 Once these helper methods have been added to the _TidyFormBuilder_, it is possible to remove the respective `f.label` code from the "people" form partial.	The form code is now much more efficient, legible, and flexible.	
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>

@@ -165,4 +165,5 @@ Now, replace the _entire_ `<div>` in the form that pertains to the **:country** 
 		 
 Opening the form in the browser shows that the dropdown menu for the **:country** field works the same as it did before. However, the code is now much more efficient and specific.
 
-
+***
+<sup>Tested and reconciled with changes made to book text</sup>
