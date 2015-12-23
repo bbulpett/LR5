@@ -151,3 +151,5 @@ Also, a link should be added to *app/views/students/index.html.erb*, as a table 
 
 Lastly, when adding a table cell in this manner, the `colspan` attribute of the final `<th` tag (inside the `<thead></thead>` markup block) needs to be changed from "3" to "4".
 
+***
+<sup>Tested and reconciled with changes made to book text</sup>
