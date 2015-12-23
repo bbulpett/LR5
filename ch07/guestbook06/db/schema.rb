@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20151005003742) do
     t.decimal  "price"
     t.date     "birthday"
     t.time     "favorite_time"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

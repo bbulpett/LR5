@@ -1,5 +1,5 @@
 #LR5
-_The following steps were used to recreate the Learning Rails 3 files within Ruby on Rails version 5.0.0.alpha. Development environment Ruby 2.2.2 and Rails 5.0.0.alpha on Ubuntu Linux version 14.04._
+_The following steps were used to recreate the Learning Rails 3 files within Ruby on Rails version 5.0.0.beta1. Development environment Ruby 2.2.2 and Rails 5.0.0.beta1 on Ubuntu Linux version 14.04._
 ##Chapter 3:
 
 ####"Creating a Layout for a Controller (hello05)"
