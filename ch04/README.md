@@ -61,16 +61,6 @@ Add the following entry to the "do" loop (right above "t.timespamps"):
 Run this command at the terminal:
 
 	~/projects/guestbook02$ rake db:migrate
-
-(open app/controllers/entries_controller)
-Add the following method to the controller:
-
-	private
-	def entry_params
-		params.require(:entry).permit(:name)
-	end
-
-The preceding method is known to Rails as a "strong parameter" (or "strong param"). It tells Rails that it's only allowed to set values for the *:name* attribute of the Entry model. Older versions of Rails required the method *attr_accessible* to be defined in the model itself.
 	
 Now change the *sign_in* method to read like this:
 

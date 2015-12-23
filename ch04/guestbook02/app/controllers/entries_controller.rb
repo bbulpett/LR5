@@ -8,9 +8,5 @@ class EntriesController < ApplicationController
 
 	  @entries = Entry.all
 	end
-	
-	private
-		def entry_params
-			params.require(:entry).permit(:name)
-		end
+
 end
