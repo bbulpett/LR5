@@ -163,4 +163,6 @@ Before this validation will work, however, the method must be defined. Add the f
 		end
 
 Save the file and test the validations in the browser. Provided the description is between 5 and 50 words long, no error should appear and the *Person* will be created.
-		
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>		
