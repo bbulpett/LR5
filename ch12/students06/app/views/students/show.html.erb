@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Given name:</strong>
+  <%= @student.given_name %>
+</p>
+
+<p>
+  <strong>Middle name:</strong>
+  <%= @student.middle_name %>
+</p>
+
+<p>
+  <strong>Family name:</strong>
+  <%= @student.family_name %>
+</p>
+
+<p>
+  <strong>Date of birth:</strong>
+  <%= @student.date_of_birth %>
+</p>
+
+<p>
+  <strong>Grade point average:</strong>
+  <%= @student.grade_point_average %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @student.start_date %>
+</p>
+
+<p>
+  <strong>Courses:</strong>
+  <% if !@student.courses.empty? %>
+    <%= @student.courses.collect {|c| link_to(c.name, c)}.join(", ").html_safe %>
+  <% else %>
+    Not enrolled in any courses yet.
+  <% end %>
+</p>
+
+<h3>Awards</h3>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Year</th>
+        <th>Student</th>
+    </tr>
+<% for award in @student.awards %>
+    <tr>
+        <td><%= award.name %></td>
+        <td><%= award.year %></td>
+        <td><%= award.student.name %></td>
+    </tr>
+<% end %>
+</table>
+
+<!-- UNCOMMENT THE FOLLOWING LINE TO SHOW THE RAW OUTPUT FOR STUDENT OBJECT -->
+<!-- <%= @student %> -->
+
+<!-- UNCOMMENT THE FOLLOWING LINE FOR YAML OUTPUT OF STUDENT ATTRIBUTES -->
+<!-- <%= debug(@student) %> -->
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Courses', courses_student_path(@student) %> |
+<%= link_to 'Awards', student_awards_path(@student) %> |
+<%= link_to 'Back', students_path %>
