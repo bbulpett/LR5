@@ -25,6 +25,9 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(student_params)
+    
+    # UNCOMMENT THE NEXT LINE TO ACTIVEATE (byebug) IN THE TERMINAL
+    # debugger
 
     respond_to do |format|
       if @student.save

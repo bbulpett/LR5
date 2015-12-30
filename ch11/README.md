@@ -44,4 +44,17 @@ It helps to make the message stand out (as shown here with all-caps and asterisk
 <sup>See text for a detailed tutorial of how to use the Rails console to work with the application and its objects, including an explanation of how to examine individual http requests.</sup>
 
 ####Debug and Debugger
+In addition to the `debug` method, which displays all of an object's attributes within the view markup, we can use the `debugger` method from the controller. Similar to the "logging" example above, open *app/controllers/students_controller.rb* and locate the **create** method (`def create...`). Just after the line that assigns the @student variable, call the debugger as follows:
+
+		def create
+			@student = Student.new(student_params)
+			debugger
+			respond_to do |format|
+		...
+
+Open the browser and navigate to *localhost:3000/students/new* and fill out the form to create a new student. Click "Create Student" to submit and notice that the browser's status bar will read "Waiting for localhost...". Now check the terminal window where Rails server is running and notice the `(byebug)` prompt. Enter "next" to move the code forward to the next line. 
+
+To view the attributes of the **student** being created, enter `p @student`. Enter the `next` keyword to keep progressing through the program, `cont` to leave the debugger and let the program continue, or `quit` to leave the debugger and shut down the server. 
+
+**NOTE:** Byebug has a wide assortment of commands to help with isolating processes or pinponting issues. Enter `help` at the `(byebug)` prompt for a complete list.
 
