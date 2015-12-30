@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     
     # UNCOMMENT THE NEXT LINE TO ACTIVEATE (byebug) IN THE TERMINAL
-    # debugger
+    debugger
 
     respond_to do |format|
       if @student.save
