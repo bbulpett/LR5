@@ -12,6 +12,7 @@ class AwardsController < ApplicationController
   # GET /awards/1
   # GET /awards/1.json
   def show
+    #raise @award.to_yaml
   end
 
   # GET /awards/new

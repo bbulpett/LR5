@@ -55,6 +55,12 @@
 <% end %>
 </table>
 
+<!-- UNCOMMENT THE FOLLOWING LINE TO SHOW THE RAW OUTPUT FOR STUDENT OBJECT -->
+<!-- <%= @student %> -->
+
+<!-- UNCOMMENT THE FOLLOWING LINE FOR YAML OUTPUT OF STUDENT ATTRIBUTES -->
+<!-- <%= debug(@student) %> -->
+
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Courses', courses_student_path(@student) %> |
 <%= link_to 'Awards', student_awards_path(@student) %> |
