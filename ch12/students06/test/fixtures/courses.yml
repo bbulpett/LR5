@@ -5,7 +5,7 @@
 # collection of records to insert into the courses_students table.
 
 surveillance:
-  name: Escape and Evation
+  name: Escape and Evasion
   students: magnum, rick
 
 # it's safest to quote strings, especially if they contain colons
