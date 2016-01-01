@@ -1,15 +1,26 @@
 require 'test_helper'
 
-class Award < ActiveRecord::Base
-  # every award is linked to a student, through student_id
-  belongs_to :student
+class AwardTest < ActiveSupport::TestCase
+  def test_validity_of_year
 
-  validates_presence_of :name, :year
+    # test for rejection of missing year
+    award = Award.new({:name => "Test award"})
+    assert !award.valid?
 
-  # particular award can only be given once in every year
-  validates_uniqueness_of :name, :scope => :year,
-    :message => "already been given for that year"
+    # test under lower boundary
+    award.year = 1979
+    assert !award.valid?
 
-  # we started the award scheme in 1980
-  validates_inclusion_of :year, :in => (1980 .. Date.today.year)
+    # lower boundary
+    award.year = 1980
+    assert award.valid?
+
+    # top boundary
+    award.year = Date.today.year
+    assert award.valid?
+
+    # top boundary case, award isn't valid for next year
+    award.year = Date.today.year + 1
+    assert !award.valid?
+  end
 end
