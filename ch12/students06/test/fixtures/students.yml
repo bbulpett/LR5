@@ -1,17 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  given_name: MyString
-  middle_name: MyString
-  family_name: MyString
-  date_of_birth: 2015-11-08
-  grade_point_average: 9.99
-  start_date: 2015-11-08
+magnum:
+  given_name: Thomas
+  middle_name: Sullivan
+  family_name: Magnum
+  date_of_birth: 1945-01-29
+  grade_point_average: 2.92
+  start_date: 1988-09-12
 
-two:
-  given_name: MyString
-  middle_name: MyString
-  family_name: MyString
-  date_of_birth: 2015-11-08
-  grade_point_average: 9.99
-  start_date: 2015-11-08
+rick:
+  given_name: Orville
+  middle_name: Wilbur
+  family_name: Richard
+  date_of_birth: 1943-07-23
+  grade_point_average: 3.94
+  start_date: 1988-09-12
+
+tc:
+  given_name: Theodore
+  middle_name:
+  family_name: Calvin
+  date_of_birth: 1939-12-18
+  grade_point_average: 3.76
+  start_date: 1988-09-12

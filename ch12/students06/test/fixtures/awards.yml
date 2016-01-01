@@ -1,11 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  year: 1
-  student_id: 1
+# instead of computing student_id for each award and giving students
+# explicit id fields, we reference the student by the name of their
+# fixture
 
-two:
-  name: MyString
-  year: 1
-  student_id: 1
+pi:
+  name: Private Investigator
+  year: 1988
+  student: magnum
+
+pilot:
+  name: Helicopter Pilot - Island Hoppers
+  year: 1990
+  student: tc
+
+owner:
+  name: King Kamehameha Club
+  year: 1989
+  student: rick

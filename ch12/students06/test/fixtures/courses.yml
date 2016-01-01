@@ -1,7 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+# instead of making us write elaborate and fragile data structures,
+# the fixtures engine knows how to turn the 'students' list into a
+# collection of records to insert into the courses_students table.
 
-two:
-  name: MyString
+surveillance:
+  name: Escape and Evation
+  students: magnum, rick
+
+# it's safest to quote strings, especially if they contain colons
+security:
+  name: "Personal and private property security"
+  students: magnum, rick
+
+aviation:
+  name: "Aviation Safety"
+  students: tc
