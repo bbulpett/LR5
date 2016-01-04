@@ -1,46 +1,43 @@
 require 'test_helper'
 
 class CoursesControllerTest < ActionController::TestCase
-  setup do
-    @course = courses(:one)
-  end
-
-  test "should get index" do
+  def test_should_get_index
     get :index
     assert_response :success
+    assert_not_nil assigns(:courses)
   end
 
-  test "should get new" do
+  def test_should_get_new
     get :new
     assert_response :success
   end
 
-  test "should create course" do
+  def test_should_create_course
     assert_difference('Course.count') do
-      post :create, params: { course: { name: @course.name } }
+      post :create, course: { name: "Cattle Rustling" }
     end
 
-    assert_redirected_to course_path(Course.last)
+    assert_redirected_to course_path(assigns(:course))
   end
 
-  test "should show course" do
-    get :show, params: { id: @course }
+  def test_should_show_course
+    get :show, :id => courses(:surveillance).id
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, params: { id: @course }
+  def test_should_get_edit
+    get :edit, id: courses(:surveillance).id
     assert_response :success
   end
 
-  test "should update course" do
-    patch :update, params: { id: @course, course: { name: @course.name } }
-    assert_redirected_to course_path(@course)
+  def test_should_update_course
+    put :update, id: courses(:surveillance).id, course: { name: "Singing" }
+    assert_redirected_to course_path(assigns(:course))
   end
 
-  test "should destroy course" do
+  def test_should_destroy_course
     assert_difference('Course.count', -1) do
-      delete :destroy, params: { id: @course }
+      delete :destroy, id: courses(:surveillance).id
     end
 
     assert_redirected_to courses_path

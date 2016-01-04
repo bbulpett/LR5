@@ -5,8 +5,8 @@ class StudentTest < ActiveSupport::TestCase
   fixtures :students, :courses
 
   def test_validity
-    jonathan = Student.new({:given_name => "Jonathan",
-        :family_name => "Higgins"})
+    jonathan = Student.new({given_name: "Jonathan",
+        family_name: "Higgins"})
     assert !jonathan.valid?, "Should require date of birth, start date"
     jonathan.date_of_birth = "1989-02-03"
     jonathan.start_date = Date.today
@@ -15,8 +15,8 @@ class StudentTest < ActiveSupport::TestCase
 
 
   def test_name
-    jonathan = Student.new({:given_name => "Jonathan",
-        :family_name => "Higgins"})
+    jonathan = Student.new({given_name: "Jonathan",
+        family_name: "Higgins"})
     assert_equal jonathan.name, "Jonathan Higgins", "name method screwed up"
   end
 
@@ -31,7 +31,7 @@ class StudentTest < ActiveSupport::TestCase
     rick = students(:rick)
     assert_equal [courses(:aviation)], magnum.unenrolled_courses
     assert_equal [courses(:aviation)], rick.unenrolled_courses
-    jonathan = Student.new({:given_name => "Jonathan", :family_name => "Higgins"})
+    jonathan = Student.new({given_name: "Jonathan", family_name: "Higgins"})
     assert_equal Course.all, jonathan.unenrolled_courses
   end
 end

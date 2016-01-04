@@ -184,6 +184,8 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails-controller-testing (0.0.3)
+      rails (>= 4.2)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -222,6 +224,7 @@ DEPENDENCIES
   jquery-rails
   rack!
   rails!
+  rails-controller-testing
   sass-rails!
   sprockets!
   sprockets-rails!
@@ -232,4 +235,4 @@ DEPENDENCIES
   web-console!
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

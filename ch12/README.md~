@@ -169,3 +169,121 @@ In *students06/test/models/student_test.rb*, let us examine some more complicate
 
 To run model tests, enter `rake test:models` at the command prompt. (For unit testing we would use `rake test:units`.)
 
+####Controller Testing
+
+Scaffolding has provided some test files in the *students06/test/controllers/* directory. For example, *courses_controller_test.rb* is capable of testing the functionality of RESTful methods. However, much greater functionality can be achieved by adding more detail...
+
+        require 'test_helper'
+
+        class CoursesControllerTest < ActionController::TestCase
+          def test_should_get_index
+            get :index
+            assert_response :success
+            assert_not_nil assigns(:courses)
+          end
+
+          def test_should_get_new
+            get :new
+            assert_response :success
+          end
+
+          def test_should_create_course
+            assert_difference('Course.count') do
+              post :create, :course => { :name => "Cattle Rustling" }
+            end
+
+            assert_redirected_to course_path(assigns(:course))
+          end
+
+          def test_should_show_course
+            get :show, :id => courses(:surveillance).id
+            assert_response :success
+          end
+
+          def test_should_get_edit
+            get :edit, :id => courses(:surveillance).id
+            assert_response :success
+          end
+
+          def test_should_update_course
+            put :update, :id => courses(:surveillance).id, :course => { :name => "Singing" }
+            assert_redirected_to course_path(assigns(:course))
+          end
+
+          def test_should_destroy_course
+            assert_difference('Course.count', -1) do
+              delete :destroy, :id => courses(:surveillance).id
+            end
+
+            assert_redirected_to courses_path
+          end
+        end
+
+Here, we've made the controller test a bit more "personal", by adding names that are actually supported by the model, like those found in the *courses.yml* fixture.
+A little more detail on what's going on in these test metho ds... 
+
+#####Calling Controllers
+
+In the above `test_should_create_course` method, the RESTful verb **post** is used to ensure that a course can be created with "Cattle Rustling" as its **name** parameter. All types of HTTP requests should be tested.
+
+#####Testing Responses
+
+<sup>Refer to the Chapter 12 text for explanations of the **assertion methods** shown above.</sup>
+
+#####Dealing with Nested Resources
+
+The **Awards** model is nested under **Students**. Therefore a bit more information is needed in *students06/test/controllers/awards_controller_test.rb*...
+
+        require 'test_helper'
+
+        class AwardsControllerTest < ActionController::TestCase
+          def test_should_get_index
+            get :index, student_id: students(:magnum).id
+            assert_response :success
+            assert_not_nil assigns(:awards)
+          end
+
+          def test_should_get_new
+            get :new, student_id: students(:magnum).id
+            assert_response :success
+          end
+
+          def test_should_create_award
+            assert_difference('Award.count') do
+              post :create, award: { year: 2008, name: 'Test award' },
+        student_id: students(:magnum).id
+            end
+
+            assert_redirected_to assert_redirected_to student_awards_url(students(:magnum))
+          end
+
+          def test_should_show_award
+            get :show, id: awards(:skydiving).id, student_id: students(:magnum).id
+            assert_response :success
+          end
+
+          def test_should_get_edit
+            get :edit, id: awards(:skydiving).id, student_id: students(:magnum).id
+            assert_response :success
+          end
+
+          def test_should_update_award
+            put :update, id: awards(:skydiving).id, award: { }, student_id:
+        students(:magnum).id
+            assert_redirected_to student_awards_url(students(:magnum))
+          end
+
+          def test_should_destroy_award
+            assert_difference('Award.count', -1) do
+              delete :destroy,  id: awards(:skydiving).id,student_id:
+        students(:magnum).id
+            end
+
+            assert_redirected_to student_awards_path(students(:magnum))
+          end
+        end
+
+Running these tests is similar to running the model tests. Issue the command `rake test:controllers` at the command prompt.
+
+####Integration Testing
+
