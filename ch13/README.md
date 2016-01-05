@@ -33,5 +33,5 @@ To see this in action and monitor the cookies, navigate to the page in a browser
 
 ####Storing Data Between Sessions
 
-
+The remainder of the chapter is a continuation of the previous section. Code for this portion is available in ch13/guestbook12. 
 

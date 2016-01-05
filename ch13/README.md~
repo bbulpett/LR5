@@ -29,5 +29,9 @@ The first line gets the previous name from the cookie so it can be displayed. Se
 			<p>Hmmm... the last time you were here, you said you were <%= @previous_name %>.</p>
 		<% end %>
 
+To see this in action and monitor the cookies, navigate to the page in a browser while monitoring the "Resources" tab of the browser's developer tools. Refer to the text for this chapter and/or the browser documentation for more on this.
 
+####Storing Data Between Sessions
+
+The remainder of the chapter is a continuation of the previous section. Code for this portion is available in ch13/guestbook12.
 
