@@ -1,6 +1,5 @@
 class EntriesController < ApplicationController
 
-	class EntriesController < ApplicationController
 			def sign_in
 				#get names array from session
 				@names=session[:names]
@@ -21,5 +20,5 @@ class EntriesController < ApplicationController
 				# store the new names array in the session
 				session[:names]=@names
 			end
-		end
+			
 end
