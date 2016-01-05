@@ -1,48 +1,36 @@
-# LR5
+#LR5
+##Chapter 13 - Sessions and Cookies
 
-##Chapter 4
+The exercises in this chapter build on the completed *guestbook02* app from Chapter 4. Completed code for the following can be found in *ch13/guestbook11*.
 
-####"Keeping Track: A Simple Guestbook (guestbook02)"
-Run this command at the terminal:
+####Getting Into and Out of Cookies
 
-	~/projects/guestbook02$ rails generate model entry
+Open *app/controllers/entries_controller.rb* and modify the `sign_in` method with the following content:
 
-(open db/migrate/<timestamp>_create_entries.rb)
-Add the following entry to the "do" loop (right above "t.timespamps"):
+		class EntryController < ApplicationController
+			def sign_in
+				@previous_name = cookies[:name]
+				@name = params[:visitor_name]
+				cookies[:name] = @name
+			end
+		end
 
-	t.string :name
+The first line gets the previous name from the cookie so it can be displayed. Second, the new name (from the form) is stored in the `@name` variable. Lastly, the name is stored to a cookie to be transmitted to the browser. Now some code can be added to *app/views/entry/sign_in.html.erb* to report the previous name to the user:
 
-Run this command at the terminal:
 
-	~/projects/guestbook02$ rake db:migrate
-	
-Now change the *sign_in* method to read like this:
+		<h1>Hello <%= @name %></h1>
+		<%= form_tag :action => 'sign_in' do %>
+			<p>Enter your name:
+			<%= text_field_tag 'visitor_name', @name %></p>
 
-	def sign_in
-		@name = params[:visitor_name]
-	  unless @name.blank?
-		@entry = Entry.create({:name => @name})
-	  end
-	end
+			<%= submit_tag 'Sign in' %>
+		<% end %>
+		<% unless @previous_name.blank? %>
+			<p>Hmmm... the last time you were here, you said you were <%= @previous_name %>.</p>
+		<% end %>
 
-NOTE: If entries were made prior to editing the *sign_in* method code, they can be dropped by stopping the server (CTRL + C) and running `rake db:rollback` and then `rake db:migrate`. Entering `rake db:migrate:redo` will also work.
+To see this in action and monitor the cookies, navigate to the page in a browser while monitoring the "Resources" tab of the browser's developer tools. Refer to the text for this chapter and/or the browser documentation for more on this.
 
-The application is now ready to accept name entries. One at a time, enter names into the text field and click "Sign In".
-Still in the *entries_controller*, create an array within the *sign_in* method that will hold all of the Entry instances:
+####Storing Data Between Sessions
 
-	@entries = Entry.all
 
-(open app/views/entries/sign_in.html.erb)
-To display the contents of the above array, append the following code to the view:
-
-	<p>Previous visitors:</p>
-	<ul>
-	<% @entries.each do |entry| %>
-		<li><%= entry.name %></li>
-	<% end %>
-	</ul>
-
-Restart the server and refresh the browser.
-
-***
-<sup>Tested and reconciled with changes made to book text</sup>
