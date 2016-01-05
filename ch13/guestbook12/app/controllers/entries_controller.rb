@@ -1,14 +1,25 @@
 class EntriesController < ApplicationController
 
-	def sign_in
-		@previous_name = cookies[:name]
-		@name = params[:visitor_name] # Held over from the original controller
-		cookies[:name] = @name
+	class EntriesController < ApplicationController
+			def sign_in
+				#get names array from session
+				@names=session[:names]
 
-		### Below is the logic that was used in the original controller 
-		#  unless @name.blank?
-		#  		@entry = Entry.create({:name => @name})
-		#  end
-		#  @entries = Entry.all
-	end
+				#if the array doesn't exist, make one
+				unless @names
+					@names=[]
+				end
+
+				#get the latest name from the form
+				@name = params[:visitorName]
+
+				if @name
+					# add the new name to the names array
+					@names << @name
+				end
+
+				# store the new names array in the session
+				session[:names]=@names
+			end
+		end
 end
