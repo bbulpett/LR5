@@ -30,6 +30,9 @@ class AwardsController < ApplicationController
     # @award = Award.new(award_params)
     @award = @student.awards.build(award_params)
 
+    # Tell the AwardMailer to send a notice Email
+    AwardMailer.award_email(@award).deliver
+
     respond_to do |format|
       if @award.save
         # format.html { redirect_to @award, notice: 'Award was successfully created.' }

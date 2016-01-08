@@ -28,6 +28,20 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  # CHAPTER 19 - THE FOLLOWING IS FROM RailsGuides documentation
+  # It's the general configuration used for Gmail-like mail servers
+  # http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration-for-gmail
+  
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                 587,
+  #   domain:               'example.com',
+  #   user_name:            '<username>',
+  #   password:             '<password>',
+  #   authentication:       'plain',
+  #   enable_starttls_auto: true  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
