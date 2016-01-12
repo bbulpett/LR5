@@ -2,7 +2,7 @@
 
 ##Chapter 19 - Mail in Rails
 
-#### Sending Mail Messages
+####Sending Mail Messages
 The first step in getting Rails to send email messages is to generate a mailer. Running `rails generate mailer AwardMailer` at the command prompt creates a _mailer_ file - *app/mailers/award_mailer.rb*. The generator also provides the view directory as well as test and preview files necessary for a fully-featured messaging system.
 
 Open *app/mailers/award_mailer.rb* in the text editor and add the following logic to the empty **AwardMailer** class...
@@ -57,3 +57,15 @@ Rails must be told to send email when awards are assigned. In *app/controllers/a
 
 **NOTE:** *Google* has very strict security requirements for apps to connect to Gmail. This is a *good* thing. These security settings may be temporarily "overridden" to test your app. Consult the documentation.
 
+####Previewing Mail
+
+Open *test/mailers/previews/award_mailer_preview.rb* in the text editor and add some logic with the `award_email` method...
+
+        # Preview all emails at http://localhost:3000/rails/mailers/award_mailer
+        class AwardMailerPreview < ActionMailer::Preview
+            def award_email
+                AwardMailer.award_email(Award.first)
+            end
+        end
+
+Now in the browser, navigate to **http://localhost:3000/rails/mailers** to check out what a generated "Award" email would look like. You can select the plain-text or HTML version.

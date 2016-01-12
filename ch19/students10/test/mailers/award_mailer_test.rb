@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class AwardMailerTest < ActionMailer::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def award_email
+    AwardMailer.award_email(Award.first)
+  end
 end
