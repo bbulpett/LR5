@@ -1,0 +1,24 @@
+<h1>Roll for <%= @course.name %></h1>
+
+<% if @course.students.count > 0 %>
+	<table>
+		<thead>
+			<tr>
+				<th>Student</th>
+				<th>GPA</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for student in @course.students do %>
+			<tr>
+				<td><%= link_to student.name, student %></td>
+				<td><%= student.grade_point_average %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p>No students are enrolled.</p>
+<% end %>
+
+<p><%= link_to "Back", @course %></p>
