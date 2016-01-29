@@ -8,8 +8,8 @@
       <th>Given name</th>
       <th>Middle name</th>
       <th>Family name</th>
-      <th>Date of birth</th>
-      <th>Grade point average</th>
+      <th>DOB</th>
+      <th>GPA</th>
       <th>Start date</th>
       <th>Courses</th>
       <th>Awards</th>
@@ -17,9 +17,9 @@
     </tr>
   </thead>
 
-  <tbody>
+<tbody>
     <% @students.each do |student| %>
-      <tr>
+    <tr>
         <td><%= student.given_name %></td>
         <td><%= student.middle_name %></td>
         <td><%= student.family_name %></td>
@@ -34,13 +34,11 @@
           <td><%= link_to 'Edit', edit_student_path(student) %></td>
           <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
-      </tr>
+    </tr>
     <% end %>
-  </tbody>
+</tbody>
 </table>
-
 <br>
-
 <% if current_user.admin? %>
   <%= link_to 'New Student', new_student_path %>
 <% end %>

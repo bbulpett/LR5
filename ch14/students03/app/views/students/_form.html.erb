@@ -27,12 +27,12 @@
   </div>
 
   <div class="field">
-    <%= f.label :date_of_birth %><br>
-    <%= f.date_select :date_of_birth %>
+    <%= f.label :date_of_birth, "DOB" %><br>
+    <%= f.date_select :date_of_birth, :start_year => 1930, :end_year => 1970 %>
   </div>
 
   <div class="field">
-    <%= f.label :grade_point_average %><br>
+    <%= f.label :grade_point_average, "GPA" %><br>
     <%= f.text_field :grade_point_average %>
   </div>
 

@@ -263,3 +263,6 @@ This uses a route which was created in the above section, "Adding Routing", that
 		<p><%= link_to "Back", @course %></p>
 
 Save the file and navigate to *localhost:3000/courses* in the browser. Create a new course, add some students, and visit the "roll" page to view the results.
+
+***
+<sup>Tested and reconciled with changes made to book text</sup>
