@@ -3,7 +3,9 @@
 
 ####Sending JavaScript to the Browser
 
-When scaffolding was generated for the *Students* application, CoffeeScript files were created inside the *app/assets/javascripts* folder. In the *students.coffee* file we may add some CoffeeScript, JavaScript, or even jQuery. Incidentally the file itself may be renamed to *students.js* if desired. Add the following script to dynamically style a field in the **New Student** form when in focus:
+When scaffolding was generated for the *Students* application, CoffeeScript files were created inside the *app/assets/javascripts* folder. In the *students.coffee* file we may add some CoffeeScript, JavaScript, or even jQuery. 
+
+To use regular JavaScript, the file itself should be renamed from *students.coffee* to *students.js*. Rails provides "out of the box" access to the jQuery library by default, so let's take advantage of that. Open *app/assets/javascripts/students.js* and add the following script to dynamically style a field in the **New Student** form when in focus:
 
 		$(document).ready(function() {
 			$("input").focus(function() {
@@ -14,6 +16,24 @@ When scaffolding was generated for the *Students* application, CoffeeScript file
 			{);
 		});
 
-Save the file and open the related stylesheet, *app/assets/stylesheets/students.scss*. Add the `curFocus` class
+Save the file and open the related stylesheet, *app/assets/stylesheets/students.scss*. Add the `curFocus` class to define how to style the focused form field...
+
+		div.curFocus {
+			backgorund: #FDECB2;
+			@include bodyshadow;
+			width: 250px;
+		}
+
+A bit of padding should also be added to the `field` class to allow for the shadowing effect.
+
+		div.field {
+			padding: 10px;
+		}
+
+####Converting to CoffeeScript
+
+
+
+####Remote Control: Basic AJAX Rendering
 
 
