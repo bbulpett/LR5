@@ -3,7 +3,9 @@
 
 ####Sending JavaScript to the Browser
 
-When scaffolding was generated for the *Students* application, CoffeeScript files were created inside the *app/assets/javascripts* folder. In the *students.coffee* file we may add some CoffeeScript, JavaScript, or even jQuery. Incidentally the file itself may be renamed to *students.js* if desired. Add the following script to dynamically style a field in the **New Student** form when in focus:
+When scaffolding was generated for the *Students* application, CoffeeScript files were created inside the *app/assets/javascripts* folder. In the *students.coffee* file we may add some CoffeeScript, JavaScript, or even jQuery. To use regular JavaScript, the file itself should be renamed to *students.js* instead of *students.coffee*. 
+
+Add the following script to dynamically style a field in the **New Student** form when in focus:
 
 		$(document).ready(function() {
 			$("input").focus(function() {
@@ -27,6 +29,3 @@ A bit of padding should also be added to the `field` class to allow for the shad
 		div.field {
 			padding: 10px;
 		}
-
-
-

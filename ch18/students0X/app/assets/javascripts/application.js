@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require students.js
 //= require turbolinks
 //= require_tree .
