@@ -2,11 +2,11 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready(function(){
+$(document).on('ready', function() {
   $("input").focus(function() {
-    $(this).parent().addClass("curFocus")
+    $(this).parent().addClass("curFocus");
   });
-  $("input").focus(function() {
-    $(this).parent().removeClass("curFocus")
+  $("input").blur(function() {
+    $(this).parent().removeClass("curFocus");
   })
 });

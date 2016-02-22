@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(version: 20151201003950) do
   create_table "courses_students", id: false, force: :cascade do |t|
     t.integer "course_id",  null: false
     t.integer "student_id", null: false
-    t.index ["course_id", "student_id"], name: "index_courses_students_on_course_id_and_student_id"
-    t.index ["student_id", "course_id"], name: "index_courses_students_on_student_id_and_course_id"
   end
+
+  add_index "courses_students", ["course_id", "student_id"], name: "index_courses_students_on_course_id_and_student_id"
+  add_index "courses_students", ["student_id", "course_id"], name: "index_courses_students_on_student_id_and_course_id"
 
   create_table "students", force: :cascade do |t|
     t.string   "given_name"

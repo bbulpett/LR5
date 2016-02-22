@@ -4,7 +4,7 @@
 
 # The following represents the preferred way to declare a jQuery function in Rails. Note the simplification of the syntax, particularly the first line, where we make use of the CoffeeScript-style function syntax "->". Also noticable is the absence of curly braces to wrap the function or semicolons ending the statements, as you would find with traditional JavaScript.
 
-$(document).on "page:change", -> 
+$(document).on "ready", -> 
    $("input").click ->
      $(this).parent().addClass("curFocus")
    $("input").blur ->
