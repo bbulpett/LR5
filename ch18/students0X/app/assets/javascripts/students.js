@@ -8,5 +8,5 @@ $(document).on('ready', function() {
   });
   $("input").blur(function() {
     $(this).parent().removeClass("curFocus");
-  })
+  });
 });
