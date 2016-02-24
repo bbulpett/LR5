@@ -7,7 +7,7 @@ _The following steps were used to recreate the Learning Rails 3 files within Rub
 
 	class HelloController < ApplicationController
 
-		layout "standardLayout"
+		layout "standard_layout"
 
 		def index
 			@message="Hello!"
@@ -16,7 +16,7 @@ _The following steps were used to recreate the Learning Rails 3 files within Rub
 		end
 	end
 
-Now create a new html.erb file in the app/views/layouts folder called standardLayout.html.erb. Paste the contents of the _hello.html.erb_ layout into the newly created file and change the contents of the paragraph tag to the following:
+Now create a new html.erb file in the app/views/layouts folder called standard_layout.html.erb. Paste the contents of the _hello.html.erb_ layout into the newly created file and change the contents of the paragraph tag to the following:
 
 	<p>(using standard layout)</p>
 

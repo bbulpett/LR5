@@ -1,6 +1,6 @@
 class HelloController < ApplicationController
 
-	layout "standardLayout"
+	layout "standard_layout"
 
 	def index
 		@message="Hello!"
