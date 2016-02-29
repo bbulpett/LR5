@@ -1,2 +1,2 @@
-class Entry < ActiveRecord::Base
+class Entry < ApplicationRecord
 end

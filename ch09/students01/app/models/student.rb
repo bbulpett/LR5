@@ -1,4 +1,4 @@
-class Student < ActiveRecord::Base
+class Student < ApplicationRecord
 	# A student may have many awards
 	has_many :awards, dependent: :destroy
 

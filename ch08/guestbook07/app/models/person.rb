@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
 	# the name is mandatory
 	validates_presence_of :name
 

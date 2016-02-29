@@ -1,4 +1,4 @@
-class Student < ActiveRecord::Base
+class Student < ApplicationRecord
 
 	has_many :awards, dependent: :destroy
 	has_and_belongs_to_many :courses

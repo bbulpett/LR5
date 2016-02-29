@@ -1,4 +1,4 @@
-class Award < ActiveRecord::Base
+class Award < ApplicationRecord
 
 	belongs_to :student
 	validates_associated :student
