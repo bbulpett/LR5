@@ -28,15 +28,19 @@
     <%= f.radio_button :country, 'Mexico' %> <%= f.label "person_country_mexico", "Mexico" %><br>
   </fieldset> -->
 
-  <% nations = { 'United States of America' => 'USA', 'Canada' => 'Canada', 'Mexico' => 'Mexico', 'United Kingdom' => 'UK' }%>
-<!-- 
-  <fieldset>
+  <% nations = { 'United States of America': 'USA', 'Canada': 'Canada', 'Mexico': 'Mexico', 'United Kingdom': 'UK' }%>
+
+<!--   <fieldset>
     <legend>Country</legend>  
-    <% list = nations.sort 
-    list.each {|x| %>
-      <%= f.radio_button :country, x[1] %> <label for="<%= ("person_country_" + x[1].downcase) %>"><%= x[0] %></label><br /> 
-    <% } %>
-  </fieldset> -->
+    <% list = nations.sort
+      list.each do |x| %>
+        <%= f.radio_button :country, x[1] %>
+        <label for="<%= ("person_country_" + x[1].downcase) %>">
+          <%= x[0] %>
+        </label>
+        <br>
+    <% end %>
+  </fieldset>  -->
 
   <%= button_select(:person, :country, nations) %>
 
@@ -47,7 +51,7 @@
 
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description, :cols => 30, :rows => 10 %>
+    <%= f.text_area :description, cols: 30, rows: 10 %>
   </div>
 
   <div class="field">
