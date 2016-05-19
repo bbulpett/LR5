@@ -15,32 +15,31 @@ class AwardsControllerTest < ActionController::TestCase
   def test_should_create_award
     assert_difference('Award.count') do
       post :create, award: { year: 2008, name: 'Test award' },
-student_id: students(:magnum).id
+                          student_id: students(:magnum).id
     end
 
-    assert_redirected_to assert_redirected_to student_awards_url(students(:magnum))
   end
 
   def test_should_show_award
-    get :show, id: awards(:skydiving).id, student_id: students(:magnum).id
+    get :show, id: awards(:pi).id, student_id: students(:magnum).id
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, id: awards(:skydiving).id, student_id: students(:magnum).id
+    get :edit, id: awards(:pi).id, student_id: students(:magnum).id
     assert_response :success
   end
 
   def test_should_update_award
-    put :update, id: awards(:skydiving).id, award: { }, student_id:
-students(:magnum).id
+    put :update, id: awards(:pi).id, award: { year: 2008, name: 'Test award' },
+    student_id: students(:magnum).id
     assert_redirected_to student_awards_url(students(:magnum))
   end
 
   def test_should_destroy_award
     assert_difference('Award.count', -1) do
-      delete :destroy,  id: awards(:skydiving).id,student_id:
-students(:magnum).id
+      delete :destroy,  id: awards(:pi).id,student_id:
+                          students(:magnum).id
     end
 
     assert_redirected_to student_awards_path(students(:magnum))

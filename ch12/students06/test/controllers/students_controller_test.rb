@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StudentsControllerTest < ActionController::TestCase
   setup do
-    @student = students(:one)
+    @student = students(:magnum)
   end
 
   test "should get index" do
@@ -17,8 +17,11 @@ class StudentsControllerTest < ActionController::TestCase
 
   test "should create student" do
     assert_difference('Student.count') do
-      post :create, params: { student: { date_of_birth: @student.date_of_birth, family_name: @student.family_name, given_name: @student.given_name, grade_point_average: @student.grade_point_average, middle_name: @student.middle_name, start_date: @student.start_date } }
-    end
+    post :create, params: { student: { date_of_birth: @student.date_of_birth,
+    family_name: @student.family_name, given_name: @student.given_name,
+    grade_point_average: @student.grade_point_average,
+    middle_name: @student.middle_name, start_date: @student.start_date } }
+  end
 
     assert_redirected_to student_path(Student.last)
   end
@@ -34,7 +37,10 @@ class StudentsControllerTest < ActionController::TestCase
   end
 
   test "should update student" do
-    patch :update, params: { id: @student, student: { date_of_birth: @student.date_of_birth, family_name: @student.family_name, given_name: @student.given_name, grade_point_average: @student.grade_point_average, middle_name: @student.middle_name, start_date: @student.start_date } }
+    patch :update, params: { id: @student, student: { date_of_birth: @student.date_of_birth,
+    family_name: @student.family_name, given_name: @student.given_name,
+    grade_point_average: @student.grade_point_average, middle_name: @student.middle_name,
+    start_date: @student.start_date } }
     assert_redirected_to student_path(@student)
   end
 

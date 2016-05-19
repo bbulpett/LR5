@@ -71,7 +71,7 @@ Finally, edit the contents of _test/fixtures/courses.yml_ like so:
 
 Firstly, note the constraints defined in  in *students06/app/models/award.rb*:
 
-        class Award < ActiveRecord::Base
+        class Award < ApplicationRecord
           # every award is linked to a student, through student_id
           belongs_to :student
 
